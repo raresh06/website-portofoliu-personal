@@ -96,7 +96,7 @@ function analizeazaSursaVideo(adresa) {
 }
 
 /* ==========================================================================
-   3. MODAL VIDEO ADAPTIV (TIKTOK VERTICAL 9:16)
+   3. MODAL VIDEO ADAPTIV (TIKTOK VERTICAL 9:16) CU NAVIGARE COMPLETĂ
    ========================================================================== */
 class ControlerModalVideo {
   constructor() {
@@ -108,6 +108,12 @@ class ControlerModalVideo {
     this.desc = document.getElementById('modalDescription');
     this.closeBtn = document.getElementById('modalClose');
     this.copyBtn = document.getElementById('modalCopyLinkBtn');
+    this.prevBtn = document.getElementById('modalPrevBtn');
+    this.nextBtn = document.getElementById('modalNextBtn');
+    this.indexBadge = document.getElementById('videoModalIndex');
+
+    this.videoIds = Object.keys(PROIECTE_VIDEO);
+    this.currentId = null;
 
     this.init();
   }
@@ -117,13 +123,28 @@ class ControlerModalVideo {
 
     this.closeBtn.addEventListener('click', () => this.inchide());
 
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', () => this.anterior());
+    }
+
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', () => this.urmator());
+    }
+
     this.modal.addEventListener('click', (e) => {
       if (e.target === this.modal) this.inchide();
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+      if (!this.modal.classList.contains('active')) return;
+      if (e.key === 'Escape') {
         this.inchide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        this.anterior();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        this.urmator();
       }
     });
 
@@ -156,14 +177,34 @@ class ControlerModalVideo {
     });
   }
 
+  anterior() {
+    if (!this.currentId) return;
+    const idx = this.videoIds.indexOf(this.currentId);
+    const nextIdx = (idx - 1 + this.videoIds.length) % this.videoIds.length;
+    this.deschide(this.videoIds[nextIdx]);
+  }
+
+  urmator() {
+    if (!this.currentId) return;
+    const idx = this.videoIds.indexOf(this.currentId);
+    const nextIdx = (idx + 1) % this.videoIds.length;
+    this.deschide(this.videoIds[nextIdx]);
+  }
+
   deschide(idVideo) {
     const proiect = PROIECTE_VIDEO[idVideo];
     if (!proiect) return;
 
+    this.currentId = idVideo;
     this.title.textContent = proiect.title;
     this.cat.textContent = proiect.category;
     this.client.textContent = proiect.client;
     this.desc.textContent = proiect.description;
+
+    const idx = this.videoIds.indexOf(idVideo);
+    if (this.indexBadge && idx !== -1) {
+      this.indexBadge.textContent = `${idx + 1} / ${this.videoIds.length}`;
+    }
 
     const sursa = analizeazaSursaVideo(proiect.videoUrl);
 
@@ -345,20 +386,87 @@ function initMeniuSiContact() {
     });
   }
 
-  // Formular de contact (cu validare GDPR conform Regulamentului UE 2016/679)
+  // Formular de contact (Securizat: Anti-Bot Honeypot, Rate Limiting & GDPR)
   const form = document.getElementById('contactForm');
   const formAlert = document.getElementById('formAlert');
+
+  // Funcție de igienizare date (protecție împotriva atacurilor XSS)
+  function curataInput(text) {
+    if (!text || typeof text !== 'string') return '';
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const nume = document.getElementById('nume').value.trim();
-      const email = document.getElementById('email').value.trim();
+      // 1. Verificare Anti-Bot Honeypot
+      const hpField = document.getElementById('_hp_security_check');
+      if (hpField && hpField.value.trim() !== '') {
+        // Bot detectat: simulăm succes fără a procesa nimic
+        formAlert.textContent = 'Mesajul a fost transmis!';
+        formAlert.className = 'form-alert success';
+        afiseazaToast('Mulțumesc! Mesajul tău a fost transmis.');
+        form.reset();
+        return;
+      }
+
+      // 2. Client-side Rate Limiting (Anti-Spam & Flooding Cooldown)
+      const RATE_KEY = 'gr_contact_rate_limit';
+      const COOLDOWN_MS = 25000; // 25 secunde între trimiteri consecutive
+      const MAX_PER_HOUR = 4;    // Maximum 4 trimiteri pe oră
+      const now = Date.now();
+
+      let trimiteri = [];
+      try {
+        trimiteri = JSON.parse(localStorage.getItem(RATE_KEY) || '[]');
+      } catch (err) {
+        trimiteri = [];
+      }
+
+      // Păstrăm doar trimiterile din ultima oră (3600000 ms)
+      trimiteri = trimiteri.filter(t => (now - t) < 3600000);
+
+      if (trimiteri.length > 0) {
+        const ultimulTimp = trimiteri[trimiteri.length - 1];
+        const diferenta = now - ultimulTimp;
+        if (diferenta < COOLDOWN_MS) {
+          const secundeAsteptare = Math.ceil((COOLDOWN_MS - diferenta) / 1000);
+          formAlert.textContent = `Securitate anti-spam: Te rugăm să aștepți încă ${secundeAsteptare} secunde înainte de a retrimite.`;
+          formAlert.className = 'form-alert error';
+          return;
+        }
+      }
+
+      if (trimiteri.length >= MAX_PER_HOUR) {
+        formAlert.textContent = 'Securitate: Ai atins limita de mesaje pe această oră. Te rog să mă contactezi direct pe WhatsApp sau telefon.';
+        formAlert.className = 'form-alert error';
+        return;
+      }
+
+      // 3. Preluare și igienizare date
+      const numeRaw = document.getElementById('nume').value.trim();
+      const emailRaw = document.getElementById('email').value.trim();
       const gdprCheckbox = document.getElementById('gdprConsent');
+
+      const nume = curataInput(numeRaw);
+      const email = curataInput(emailRaw);
 
       if (!nume || !email) {
         formAlert.textContent = 'Te rog să introduci numele și adresa de email.';
+        formAlert.className = 'form-alert error';
+        return;
+      }
+
+      // Validare format email de bază
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailRaw)) {
+        formAlert.textContent = 'Te rog să introduci o adresă de email validă.';
         formAlert.className = 'form-alert error';
         return;
       }
@@ -368,6 +476,12 @@ function initMeniuSiContact() {
         formAlert.className = 'form-alert error';
         return;
       }
+
+      // Înregistrare timestamp trimitere pentru rate-limiting
+      trimiteri.push(now);
+      try {
+        localStorage.setItem(RATE_KEY, JSON.stringify(trimiteri));
+      } catch (err) {}
 
       formAlert.textContent = 'Mesajul a fost transmis! Îți voi răspunde în cel mai scurt timp.';
       formAlert.className = 'form-alert success';
@@ -584,6 +698,415 @@ function initLegalModal() {
 }
 
 /* ==========================================================================
+   12. CEAS LIVE & INDICATOR DISPONIBILITATE (IAȘI EUROPE/BUCHAREST)
+   ========================================================================== */
+function initLiveClock() {
+  const timeDisplays = document.querySelectorAll('.live-time-display');
+  if (!timeDisplays.length) return;
+
+  function actualizeazaCeas() {
+    try {
+      const now = new Date();
+      const formatat = now.toLocaleTimeString('ro-RO', {
+        timeZone: 'Europe/Bucharest',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+      timeDisplays.forEach(el => {
+        el.textContent = formatat;
+      });
+    } catch (e) {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      timeDisplays.forEach(el => {
+        el.textContent = `${h}:${m}:${s}`;
+      });
+    }
+  }
+
+  actualizeazaCeas();
+  setInterval(actualizeazaCeas, 1000);
+}
+
+/* ==========================================================================
+   13. COMMAND PALETTE (CMD+K / CTRL+K SPOTLIGHT SEARCH)
+   ========================================================================== */
+const COMANDI_PALETTE = [
+  // Videoclipuri 9:16
+  {
+    id: 'v-sticker',
+    title: 'Tiktok — Campanie „Găsește Sticker-ul”',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'sticker concurs interactiv tiktok video reels',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-sticker'); }
+  },
+  {
+    id: 'v-chez-les-amis',
+    title: 'Tiktok — Atmosferă & Concurs Chez Les Amis',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'chez les amis eveniment party bilete giveaway tiktok',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-chez-les-amis'); }
+  },
+  {
+    id: 'v-emimusic',
+    title: 'Tiktok — Promo Lansare EMIMUSIC5',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'emimusic muzica capcut beat ritm lansare promo',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-emimusic'); }
+  },
+  {
+    id: 'v-sytc-1',
+    title: 'Tiktok — See You There Club (Vol. 1)',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'see you there club sytc teaser petrecere noapte',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-1'); }
+  },
+  {
+    id: 'v-sytc-2',
+    title: 'Tiktok — See You There Club (Vol. 2)',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'sytc vol 2 tranzitie dinamica tiktok',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-2'); }
+  },
+  {
+    id: 'v-sytc-3',
+    title: 'Tiktok — See You There Club (Vol. 3)',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'sytc vol 3 reminder bilete link',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-3'); }
+  },
+  {
+    id: 'v-sytc-amr',
+    title: 'Tiktok — Numărătoare Inversă A.M.R.',
+    category: 'Video 9:16',
+    icon: 'fa-solid fa-play',
+    keywords: 'amr countdown urgenta fomo sytc final',
+    action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-amr'); }
+  },
+  // Secțiuni Pagină
+  {
+    id: 'sec-acasa',
+    title: 'Mergi la: Acasă (Început)',
+    category: 'Navigare',
+    icon: 'fa-solid fa-house',
+    keywords: 'acasa sus top hero',
+    action: () => { document.getElementById('acasa')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  {
+    id: 'sec-despre',
+    title: 'Mergi la: Despre Mine & Credențiale FEAA',
+    category: 'Navigare',
+    icon: 'fa-solid fa-user',
+    keywords: 'despre mine bio feaa marketing facultate studii',
+    action: () => { document.getElementById('despre')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  {
+    id: 'sec-video',
+    title: 'Mergi la: Portofoliu Videoclipuri (Cele 7 TikTok-uri)',
+    category: 'Navigare',
+    icon: 'fa-solid fa-film',
+    keywords: 'videoclipuri reels tiktok portofoliu clipuri',
+    action: () => { document.getElementById('videoclipuri')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  {
+    id: 'sec-grafica',
+    title: 'Mergi la: Campanii Vizuale & Afișe',
+    category: 'Navigare',
+    icon: 'fa-solid fa-palette',
+    keywords: 'grafica afise postere canva figma',
+    action: () => { document.getElementById('grafica')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  {
+    id: 'sec-proces',
+    title: 'Mergi la: Proces de Lucru',
+    category: 'Navigare',
+    icon: 'fa-solid fa-list-check',
+    keywords: 'proces lucru cum lucrez etape strategie',
+    action: () => { document.getElementById('proces')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  {
+    id: 'sec-contact',
+    title: 'Mergi la: Contact & Colaborări',
+    category: 'Navigare',
+    icon: 'fa-solid fa-paper-plane',
+    keywords: 'contact colaboreaza formular scrie email telefon',
+    action: () => { document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }
+  },
+  // Documente & Credențiale
+  {
+    id: 'doc-cv',
+    title: 'Descarcă: Curriculum Vitae (PDF)',
+    category: 'Document',
+    icon: 'fa-solid fa-file-arrow-down',
+    keywords: 'cv curriculum vitae resume descarca pdf',
+    action: () => { window.open('https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view', '_blank', 'noopener,noreferrer'); }
+  },
+  {
+    id: 'doc-efset',
+    title: 'Vezi: Certificat EF SET C2 Engleză (PDF)',
+    category: 'Certificat',
+    icon: 'fa-solid fa-award',
+    keywords: 'ef set engleza c2 certificat limbi',
+    action: () => { window.open('https://drive.google.com/file/d/13Eg0R29hQQGtWPJM6xENJZiQUlxEiaWa/view', '_blank', 'noopener,noreferrer'); }
+  },
+  {
+    id: 'doc-pptx',
+    title: 'Vezi: Prezentare Marketing FEAA (PPTX)',
+    category: 'Prezentare',
+    icon: 'fa-solid fa-file-powerpoint',
+    keywords: 'marketing pptx prezentare feaa studiu',
+    action: () => { window.open('https://drive.google.com/file/d/1UNjBTrV2YokOktUYHAxcwBTCbJyi6Vh1/view', '_blank', 'noopener,noreferrer'); }
+  },
+  // Acțiuni Rapide
+  {
+    id: 'act-email',
+    title: 'Copiază Adresa de Email (raresh554@gmail.com)',
+    category: 'Acțiune Rapidă',
+    icon: 'fa-regular fa-copy',
+    keywords: 'copiaza email raresh554 mail adresa',
+    action: () => {
+      navigator.clipboard && navigator.clipboard.writeText('raresh554@gmail.com');
+      afiseazaToast('Email-ul raresh554@gmail.com a fost copiat în clipboard!');
+    }
+  },
+  {
+    id: 'act-whatsapp',
+    title: 'Scrie direct pe WhatsApp (+40 730 148 593)',
+    category: 'Comunicare',
+    icon: 'fa-brands fa-whatsapp',
+    keywords: 'whatsapp mesaj chat telefon',
+    action: () => { window.open('https://wa.me/40730148593', '_blank', 'noopener,noreferrer'); }
+  },
+  // Legal & emimusic.ro
+  {
+    id: 'leg-conf',
+    title: 'Deschide: Politică de Confidențialitate (GDPR)',
+    category: 'Legal',
+    icon: 'fa-solid fa-user-shield',
+    keywords: 'gdpr confidentialitate date personale securitate anspdcp',
+    action: () => {
+      const modal = document.getElementById('legalModal');
+      if (modal) {
+        const triggers = document.querySelectorAll('.legal-tab-btn');
+        triggers.forEach(b => {
+          if (b.getAttribute('data-target') === 'tab-confidentialitate') b.click();
+        });
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  },
+  {
+    id: 'leg-cookie',
+    title: 'Deschide: Politică de Cookie-uri',
+    category: 'Legal',
+    icon: 'fa-solid fa-cookie',
+    keywords: 'cookie cookies eprivacy preferinte',
+    action: () => {
+      const modal = document.getElementById('legalModal');
+      if (modal) {
+        const triggers = document.querySelectorAll('.legal-tab-btn');
+        triggers.forEach(b => {
+          if (b.getAttribute('data-target') === 'tab-cookie') b.click();
+        });
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  },
+  {
+    id: 'leg-termeni',
+    title: 'Deschide: Termeni, Drepturi de Autor & Facturare emimusic.ro',
+    category: 'Legal & Fiscal',
+    icon: 'fa-solid fa-file-contract',
+    keywords: 'termeni drepturi autor emimusic firma facturare contract fiscal legea 8/1996 anpc',
+    action: () => {
+      const modal = document.getElementById('legalModal');
+      if (modal) {
+        const triggers = document.querySelectorAll('.legal-tab-btn');
+        triggers.forEach(b => {
+          if (b.getAttribute('data-target') === 'tab-termeni') b.click();
+        });
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+  }
+];
+
+function initCommandPalette() {
+  const modal = document.getElementById('cmdPaletteModal');
+  const trigger = document.getElementById('cmdKTrigger');
+  const input = document.getElementById('cmdPaletteInput');
+  const list = document.getElementById('cmdPaletteList');
+  const backdrop = document.getElementById('cmdPaletteBackdrop');
+  const escKey = document.getElementById('cmdPaletteCloseKey');
+
+  if (!modal || !input || !list) return;
+
+  let activeIndex = 0;
+  let currentFiltered = [...COMANDI_PALETTE];
+
+  function renderList(items) {
+    list.innerHTML = '';
+    currentFiltered = items;
+
+    if (items.length === 0) {
+      list.innerHTML = `<div class="cmd-palette-empty"><i class="fa-solid fa-magnifying-glass"></i> Niciun rezultat găsit pentru „${input.value}”</div>`;
+      return;
+    }
+
+    items.forEach((item, idx) => {
+      const el = document.createElement('div');
+      el.className = `cmd-item ${idx === activeIndex ? 'active' : ''}`;
+      el.innerHTML = `
+        <div class="cmd-item-left">
+          <i class="${item.icon} cmd-item-icon"></i>
+          <span>${item.title}</span>
+        </div>
+        <span class="cmd-item-cat">${item.category}</span>
+      `;
+
+      el.addEventListener('click', () => {
+        executeAction(item);
+      });
+
+      el.addEventListener('mouseenter', () => {
+        activeIndex = idx;
+        updateActiveItem();
+      });
+
+      list.appendChild(el);
+    });
+
+    scrollActiveIntoView();
+  }
+
+  function updateActiveItem() {
+    const itemEls = list.querySelectorAll('.cmd-item');
+    itemEls.forEach((el, idx) => {
+      if (idx === activeIndex) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
+  }
+
+  function scrollActiveIntoView() {
+    const activeEl = list.querySelector('.cmd-item.active');
+    if (activeEl) {
+      activeEl.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function executeAction(item) {
+    closePalette();
+    setTimeout(() => {
+      if (typeof item.action === 'function') {
+        item.action();
+      }
+    }, 120);
+  }
+
+  function openPalette() {
+    modal.classList.add('active');
+    input.value = '';
+    activeIndex = 0;
+    renderList(COMANDI_PALETTE);
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 60);
+  }
+
+  function closePalette() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    input.blur();
+  }
+
+  if (trigger) {
+    trigger.addEventListener('click', openPalette);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closePalette);
+  }
+
+  if (escKey) {
+    escKey.addEventListener('click', closePalette);
+  }
+
+  // Căutare live
+  input.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    if (!query) {
+      activeIndex = 0;
+      renderList(COMANDI_PALETTE);
+      return;
+    }
+
+    const filtered = COMANDI_PALETTE.filter(item => {
+      return item.title.toLowerCase().includes(query) ||
+             item.category.toLowerCase().includes(query) ||
+             item.keywords.toLowerCase().includes(query);
+    });
+
+    activeIndex = 0;
+    renderList(filtered);
+  });
+
+  // Navigare tastatură
+  window.addEventListener('keydown', (e) => {
+    // Cmd+K sau Ctrl+K pentru a deschide/închide
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (modal.classList.contains('active')) {
+        closePalette();
+      } else {
+        openPalette();
+      }
+      return;
+    }
+
+    if (!modal.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closePalette();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (currentFiltered.length > 0) {
+        activeIndex = (activeIndex + 1) % currentFiltered.length;
+        updateActiveItem();
+        scrollActiveIntoView();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentFiltered.length > 0) {
+        activeIndex = (activeIndex - 1 + currentFiltered.length) % currentFiltered.length;
+        updateActiveItem();
+        scrollActiveIntoView();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentFiltered.length > 0 && currentFiltered[activeIndex]) {
+        executeAction(currentFiltered[activeIndex]);
+      }
+    }
+  });
+}
+
+/* ==========================================================================
    PORNIRE LA ÎNCĂRCAREA PAGINII
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -593,8 +1116,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollQOL();
   initCookieConsent();
   initLegalModal();
+  initLiveClock();
+  initCommandPalette();
   window.modalVideo = new ControlerModalVideo();
   window.modalImagine = new ControlerImageLightbox();
 
-  console.log('Portofoliu personal GR — conformitate GDPR, Cookie consent & cele 7 clipuri video active.');
+  console.log('Portofoliu personal GR — conformitate GDPR, Cookie consent, securitate & cele 7 clipuri video active.');
 });

@@ -1,0 +1,30 @@
+{
+  "name": "Gheorgheș Rareș — Portofoliu Marketing & Video",
+  "short_name": "GR Portofoliu",
+  "description": "Portofoliu personal Gheorgheș Rareș (GR) — Creator de conținut digital, producție video TikTok/Reels și strategie de marketing.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#121213",
+  "theme_color": "#121213",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
+

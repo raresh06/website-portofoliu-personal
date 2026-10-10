@@ -1948,6 +1948,390 @@ body.cursor-hover .cursor-circle {
   color: #ffffff;
 }
 
+/* ==========================================================================
+   INDICATOR LIVE STATUS (IAȘI LOCAL TIME & DISPONIBILITATE)
+   ========================================================================== */
+@keyframes livePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.75);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.live-pulse-dot {
+  width: 7.5px;
+  height: 7.5px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  animation: livePulse 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.live-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  user-select: none;
+  transition: border-color var(--transition);
+}
+
+.live-status-pill:hover {
+  border-color: #ffffff;
+}
+
+.live-city {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.live-divider {
+  color: var(--border-medium);
+  font-size: 0.7rem;
+}
+
+.live-time {
+  font-family: var(--font-mono);
+  color: #e2e2df;
+  font-size: 0.78rem;
+}
+
+.live-status-badge {
+  color: #4ade80;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+/* Tag Live Status în Hero */
+.hero-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  user-select: none;
+  max-width: fit-content;
+}
+
+.hero-status-tag strong {
+  font-family: var(--font-mono);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   COMMAND PALETTE (CMD+K / CTRL+K SPOTLIGHT SEARCH)
+   ========================================================================== */
+.cmd-k-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all var(--transition);
+}
+
+.cmd-k-trigger:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  background-color: var(--bg-subtle);
+  transform: translateY(-1px);
+}
+
+.cmd-k-kbd {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.1rem 0.35rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.cmd-palette-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10005;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: clamp(10vh, 14vh, 18vh);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cmd-palette-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cmd-palette-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cmd-palette-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background-color: #161618;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  transform: translateY(-12px) scale(0.98);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.cmd-palette-modal.active .cmd-palette-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.cmd-palette-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  background-color: #19191c;
+}
+
+.cmd-palette-icon {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.cmd-palette-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+}
+
+.cmd-palette-input::placeholder {
+  color: var(--text-faint);
+}
+
+.cmd-palette-esc {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.cmd-palette-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.cmd-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-main);
+  font-size: 0.88rem;
+}
+
+.cmd-item-icon {
+  width: 18px;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.cmd-item-cat {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+
+.cmd-item:hover,
+.cmd-item.active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.cmd-item:hover .cmd-item-left,
+.cmd-item.active .cmd-item-left {
+  color: #ffffff;
+}
+
+.cmd-item:hover .cmd-item-icon,
+.cmd-item.active .cmd-item-icon {
+  color: #ffffff;
+}
+
+.cmd-palette-empty {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.cmd-palette-footer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.65rem 1.25rem;
+  border-top: 1px solid var(--border-light);
+  background-color: #141416;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.cmd-footer-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cmd-footer-hint span {
+  font-family: var(--font-mono);
+  padding: 0.05rem 0.3rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   VIDEO MODAL NAVIGATION (PREV / NEXT / CONTOR 1/7)
+   ========================================================================== */
+.modal-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.video-counter-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.1rem 0.45rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+
+.modal-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.modal-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.modal-nav-btn:hover {
+  border-color: #ffffff;
+  background-color: var(--bg-subtle);
+}
+
+/* ==========================================================================
+   BADGE COMERCIAL & FISCAL EMIMUSIC.RO
+   ========================================================================== */
+.fiscal-entity-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.95rem 1.15rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  margin-top: 1.25rem;
+}
+
+.fiscal-badge-icon {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-top: 0.1rem;
+}
+
+.fiscal-badge-text {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.fiscal-badge-text strong {
+  color: #ffffff;
+}
+
+.footer-fiscal-note {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  margin-top: 0.35rem;
+}
+
+.footer-fiscal-note strong {
+  color: #ffffff;
+}
+
 /* --- BUTON PLUTITOR ÎNAPOI SUS (QOL) --- */
 .back-to-top-btn {
   position: fixed;
@@ -2026,6 +2410,7 @@ body.cursor-hover .cursor-circle {
   }
 
   .nav-menu,
+  .header-right .header-status-pill,
   .header-right .cv-pill-header,
   .header-right .btn {
     display: none;

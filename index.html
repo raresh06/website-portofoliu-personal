@@ -4,11 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>GR — Gheorgheș Rareș | Portofoliu Marketing & Video</title>
-  <meta name="description" content="Portofoliul personal al lui Gheorgheș Rareș (GR). Student Marketing FEAA Iași & Digital Content Creator. Campanii video TikTok/Reels, grafică social media și strategie digitală.">
+  <meta name="description" content="Portofoliul personal al lui Gheorgheș Rareș (GR). Student Marketing FEAA Iași & Digital Content Creator la emimusic.ro. Campanii video TikTok/Reels 9:16, grafică social media și strategie digitală.">
 
-  <!-- Fonturi curatoriale -->
+  <!-- Politici de Securitate Web & Anteturi de Protecție -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; frame-src 'self' https://drive.google.com; media-src 'self' https://drive.google.com blob:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
+
+  <!-- Optimizări PWA & Mobil -->
+  <meta name="theme-color" content="#121213">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Open Graph & Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GR — Gheorgheș Rareș | Portofoliu Marketing & Video">
+  <meta property="og:description" content="Portofoliul personal Gheorgheș Rareș: campanii video TikTok & Reels 9:16, grafică social media, copywriting și strategie de marketing.">
+  <meta property="og:image" content="assets/portrait.JPG">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:site_name" content="Gheorgheș Rareș Portofoliu">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GR — Gheorgheș Rareș | Portofoliu Marketing & Video">
+  <meta name="twitter:description" content="Portofoliul personal Gheorgheș Rareș: campanii video TikTok & Reels 9:16, grafică social media și strategie digitală.">
+  <meta name="twitter:image" content="assets/portrait.JPG">
+
+  <!-- Fonturi curatoriale & Resurse externe (Preconnect) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://drive.google.com">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
@@ -53,8 +81,24 @@
       </nav>
 
       <div class="header-right">
+        <!-- Live Status Pill (Iași Local Time & Disponibilitate) -->
+        <div class="live-status-pill header-status-pill" title="Fus orar Iași, România (EET) • Disponibil pentru colaborări">
+          <span class="live-pulse-dot" aria-hidden="true"></span>
+          <span class="live-city">Iași, RO</span>
+          <span class="live-divider">•</span>
+          <span class="live-time live-time-display">--:--:--</span>
+          <span class="live-divider">•</span>
+          <span class="live-status-badge">Disponibil</span>
+        </div>
+
+        <!-- Buton Comenzi Rapide Cmd+K / Ctrl+K -->
+        <button type="button" class="cmd-k-trigger" id="cmdKTrigger" aria-label="Deschide comenzi rapide și căutare" title="Căutare rapidă (Cmd+K / Ctrl+K)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="cmd-k-kbd">⌘K</span>
+        </button>
+
         <!-- BUTON CV CU ICONIȚĂ -->
-        <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener" class="cv-pill-header" title="Descarcă CV-ul în format PDF / DOCX">
+        <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener noreferrer" class="cv-pill-header" title="Descarcă CV-ul în format PDF / DOCX">
           <i class="fa-solid fa-file-arrow-down cv-icon"></i>
           <span class="cv-text">Descarcă CV</span>
         </a>
@@ -86,14 +130,14 @@
       <li><a href="#contact" class="mobile-link">Contact</a></li>
     </ul>
     <div class="mobile-nav-footer">
-      <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener" class="btn btn-primary btn-full" style="margin-bottom: 1.25rem;">
+      <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full" style="margin-bottom: 1.25rem;">
         <i class="fa-solid fa-file-arrow-down"></i> Descarcă CV
       </a>
       <p>Gheorgheș Rareș • Iași, România</p>
       <div class="social-links-simple">
-        <a href="https://linkedin.com/in/gheorghes-r-62567335a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://linkedin.com/in/gheorghes-r-62567335a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:raresh554@gmail.com">Email</a>
-        <a href="https://wa.me/40730148593" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/40730148593" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -104,6 +148,12 @@
       <div class="container hero-layout">
         <div class="hero-intro">
           
+          <!-- Live Status Tag (Hero) -->
+          <div class="hero-status-tag" title="Fus orar Iași, România • Disponibil pentru colaborări">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span>Iași, RO • <strong class="live-time-display">--:--:--</strong> (EET) • Disponibil pentru colaborări</span>
+          </div>
+
           <h1 class="hero-heading hero-quote-heading">
             „Arta nu este ceea ce vezi, ci ceea ce îi faci pe ceilalți să vadă.”
           </h1>
@@ -118,11 +168,11 @@
 
           <div class="hero-actions">
             <a href="#videoclipuri" class="btn btn-primary">Vezi cele 7 videoclipuri</a>
-            <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener" class="btn btn-outline btn-with-icon">
+            <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-with-icon">
               <i class="fa-solid fa-file-arrow-down"></i>
               <span>Descarcă CV</span>
             </a>
-            <a href="https://wa.me/40730148593" target="_blank" rel="noopener" class="btn btn-secondary btn-with-icon">
+            <a href="https://wa.me/40730148593" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-with-icon">
               <i class="fa-brands fa-whatsapp"></i>
               <span>WhatsApp Rapid</span>
             </a>
@@ -193,7 +243,7 @@
 
             <!-- Carduri rapide de certificare & documente -->
             <div class="about-credentials-row">
-              <a href="https://drive.google.com/file/d/13Eg0R29hQQGtWPJM6xENJZiQUlxEiaWa/view" target="_blank" rel="noopener" class="credential-card" title="Certificat EF SET Limba Engleză">
+              <a href="https://drive.google.com/file/d/13Eg0R29hQQGtWPJM6xENJZiQUlxEiaWa/view" target="_blank" rel="noopener noreferrer" class="credential-card" title="Certificat EF SET Limba Engleză">
                 <i class="fa-solid fa-award credential-icon"></i>
                 <div class="credential-info">
                   <span class="cred-title">Certificat EF SET C2</span>
@@ -202,7 +252,7 @@
                 <i class="fa-solid fa-arrow-up-right-from-square cred-arrow"></i>
               </a>
 
-              <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener" class="credential-card" title="Descarcă CV-ul complet">
+              <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener noreferrer" class="credential-card" title="Descarcă CV-ul complet">
                 <i class="fa-solid fa-file-arrow-down credential-icon"></i>
                 <div class="credential-info">
                   <span class="cred-title">Curriculum Vitae</span>
@@ -211,7 +261,7 @@
                 <i class="fa-solid fa-arrow-up-right-from-square cred-arrow"></i>
               </a>
 
-              <a href="https://drive.google.com/file/d/1UNjBTrV2YokOktUYHAxcwBTCbJyi6Vh1/view" target="_blank" rel="noopener" class="credential-card" title="Prezentare Marketing PPTX">
+              <a href="https://drive.google.com/file/d/1UNjBTrV2YokOktUYHAxcwBTCbJyi6Vh1/view" target="_blank" rel="noopener noreferrer" class="credential-card" title="Prezentare Marketing PPTX">
                 <i class="fa-solid fa-file-powerpoint credential-icon"></i>
                 <div class="credential-info">
                   <span class="cred-title">Studiu de Marketing</span>
@@ -547,7 +597,7 @@
                 <span class="mini-asset-link" data-img-src="https://lh3.googleusercontent.com/d/1OnY9nXmYwh2YYBeZTuA1ewuXKA5TZW0n" data-img-title="Notificare Reminder Story">
                   <i class="fa-solid fa-bell"></i> Notificare Story
                 </span>
-                <a href="https://drive.google.com/file/d/1ubIU9ZVW3pvcK5IuwIxX5baVZWO0peJR/view" target="_blank" rel="noopener" class="mini-asset-link">
+                <a href="https://drive.google.com/file/d/1ubIU9ZVW3pvcK5IuwIxX5baVZWO0peJR/view" target="_blank" rel="noopener noreferrer" class="mini-asset-link">
                   <i class="fa-regular fa-file-pdf"></i> Poster Stradal (PDF)
                 </a>
               </div>
@@ -701,7 +751,7 @@
                 <span class="copy-hint"><i class="fa-regular fa-copy"></i> Copiază</span>
               </a>
 
-              <a href="https://wa.me/40730148593?text=Salut%20Rares,%20am%20vazut%20portofoliul%20tau%20si%20as%20vrea%20sa%20discutam!" target="_blank" rel="noopener" class="direct-email-row whatsapp-row">
+              <a href="https://wa.me/40730148593?text=Salut%20Rares,%20am%20vazut%20portofoliul%20tau%20si%20as%20vrea%20sa%20discutam!" target="_blank" rel="noopener noreferrer" class="direct-email-row whatsapp-row">
                 <i class="fa-brands fa-whatsapp"></i>
                 <span class="email-text">Scrie-mi pe WhatsApp</span>
                 <span class="copy-hint">&rarr;</span>
@@ -714,15 +764,21 @@
             </div>
 
             <div class="social-direct">
-              <a href="https://linkedin.com/in/gheorghes-r-62567335a/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
-              <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> CV complet (PDF)</a>
-              <a href="https://drive.google.com/drive/folders/1piDdTZskp1D5C_Bqs0REfTus4NQaxdAZ" target="_blank" rel="noopener"><i class="fa-brands fa-google-drive"></i> Folder Google Drive</a>
+              <a href="https://linkedin.com/in/gheorghes-r-62567335a/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+              <a href="https://drive.google.com/file/d/1YLLMNy8l8LGd3vWrVJnFyFIHM9wlyg5-/view" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-arrow-down"></i> CV complet (PDF)</a>
+              <a href="https://drive.google.com/drive/folders/1piDdTZskp1D5C_Bqs0REfTus4NQaxdAZ" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-drive"></i> Folder Google Drive</a>
             </div>
           </div>
 
           <!-- Formular simplu de contact -->
           <div class="contact-right">
             <form class="simple-form" id="contactForm" onsubmit="return false;">
+              <!-- Capcană de securitate Anti-Bot Honeypot (complet invizibil utilizatorilor reali) -->
+              <div class="form-hp-field" aria-hidden="true" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden;">
+                <label for="_hp_security_check">Câmp de securitate (lăsați necompletat)</label>
+                <input type="text" id="_hp_security_check" name="_hp_security_check" tabindex="-1" autocomplete="off">
+              </div>
+
               <div class="form-group">
                 <label for="nume">Numele tău / Compania</label>
                 <input type="text" id="nume" name="nume" placeholder="ex. Mihai Ionescu" required>
@@ -751,6 +807,14 @@
               </button>
 
               <div class="form-alert" id="formAlert"></div>
+
+              <!-- Mențiune Comercială & Facturare Fiscală emimusic.ro -->
+              <div class="fiscal-entity-badge">
+                <div class="fiscal-badge-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div class="fiscal-badge-text">
+                  <strong>Cadru Comercial & Facturare:</strong> Serviciile de creație conținut video și marketing se contractează și se facturează fiscal prin entitatea înregistrată în România ce operează brandul <strong>emimusic.ro</strong>.
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -767,6 +831,7 @@
           <span class="footer-name">Gheorgheș Rareș</span>
         </div>
         <p class="footer-text">Portofoliu personal de marketing și conținut digital • Iași, România</p>
+        <p class="footer-fiscal-note">Servicii comerciale contractate și facturate fiscal prin entitatea din România a <strong>emimusic.ro</strong>.</p>
 
         <!-- Link-uri Legale & Conformitate România / UE -->
         <div class="footer-legal-links">
@@ -804,12 +869,23 @@
     <div class="video-modal-dialog vertical-reel-dialog">
       <div class="video-modal-bar">
         <div class="modal-info-text">
-          <span class="modal-cat-name" id="modalCategory">Tiktok 9:16</span>
+          <div class="modal-meta-row">
+            <span class="modal-cat-name" id="modalCategory">Tiktok 9:16</span>
+            <span class="video-counter-pill" id="videoModalIndex">1 / 7</span>
+          </div>
           <h3 class="modal-video-title" id="modalTitle">Titlu Videoclip</h3>
         </div>
-        <button class="modal-close" id="modalClose" aria-label="Închide fereastra">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <div class="modal-bar-actions">
+          <button type="button" class="modal-nav-btn" id="modalPrevBtn" aria-label="Clipul anterior" title="Anterior (←)">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button type="button" class="modal-nav-btn" id="modalNextBtn" aria-label="Clipul următor" title="Următor (→)">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <button type="button" class="modal-close" id="modalClose" aria-label="Închide fereastra" title="Închide (Esc)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Cadru video format telefon 9:16 vertical -->
@@ -888,12 +964,15 @@
           <p class="legal-updated">Ultima actualizare: Octombrie 2026 • În conformitate cu Regulamentul (UE) 2016/679 (GDPR) și Legea nr. 190/2018</p>
 
           <section class="legal-section">
-            <h4>1. Operatorul de date cu caracter personal</h4>
+            <h4>1. Operatorul de date cu caracter personal & Cadrul Comercial</h4>
             <p>
-              Operatorul datelor prelucrate prin intermediul acestui site este <strong>Gheorgheș Rareș</strong>, persoană fizică, student la Facultatea de Economie și Administrarea Afacerilor (FEAA), Universitatea „Alexandru Ioan Cuza” din Iași și Digital Content Creator la emimusic.ro, cu reședința în Iași, România.
+              Operatorul datelor prelucrate prin intermediul acestui site de portofoliu este <strong>Gheorgheș Rareș</strong>, persoană fizică, student la Facultatea de Economie și Administrarea Afacerilor (FEAA), Universitatea „Alexandru Ioan Cuza” din Iași și Digital Content Creator la <strong>emimusic.ro</strong>, cu reședința în Iași, România.
             </p>
             <p>
-              Pentru orice solicitare privind datele tale personale, mă poți contacta direct la email: <strong>raresh554@gmail.com</strong> sau telefon / WhatsApp: <strong>+40 730 148 593</strong>.
+              <strong>Cadrul Comercial & Entitatea Juridică Înregistrată în România:</strong> Toate activitățile comerciale, contractele de colaborare, serviciile profesionale de producție video / marketing digital și facturarea fiscală sunt derulate în deplină legalitate prin intermediul <strong>entității juridice înregistrate în România ce operează platforma și brandul emimusic.ro</strong> (societate comercială română plătitoare de taxe și impozite, emitentă de facturi fiscale conforme și contracte de prestări servicii / cesiune drepturi).
+            </p>
+            <p>
+              Pentru orice solicitare privind datele tale personale sau colaborări, mă poți contacta direct la email: <strong>raresh554@gmail.com</strong> sau telefon / WhatsApp: <strong>+40 730 148 593</strong>.
             </p>
           </section>
 
@@ -910,8 +989,9 @@
             <h4>3. Temeiul juridic al prelucrării</h4>
             <ul>
               <li><strong>Art. 6 alin. (1) lit. (a) GDPR:</strong> Consimțământul tău expres, acordat prin bifarea căsuței din formularul de contact sau acceptarea modulelor cookie.</li>
-              <li><strong>Art. 6 alin. (1) lit. (b) GDPR:</strong> Efectuarea de demersuri la cererea persoanei vizate înainte de încheierea unui contract de prestări servicii / colaborare.</li>
-              <li><strong>Art. 6 alin. (1) lit. (f) GDPR:</strong> Interesul legitim de a asigura integritatea și securitatea site-ului web.</li>
+              <li><strong>Art. 6 alin. (1) lit. (b) GDPR:</strong> Efectuarea de demersuri la cererea persoanei vizate înainte de încheierea unui contract de prestări servicii / colaborare comercială.</li>
+              <li><strong>Art. 6 alin. (1) lit. (c) GDPR:</strong> Îndeplinirea obligațiilor legale și fiscale aplicabile conform Codului Fiscal Român în cazul colaborărilor contractuale și emiterii facturilor fiscale prin entitatea emimusic.ro.</li>
+              <li><strong>Art. 6 alin. (1) lit. (f) GDPR:</strong> Interesul legitim de a asigura securitatea cibernetică și prevenirea atacurilor de tip spam / bot pe formularul de contact.</li>
             </ul>
           </section>
 
@@ -925,7 +1005,10 @@
           <section class="legal-section">
             <h4>5. Perioada de păstrare a datelor</h4>
             <p>
-              Mesajele și datele de contact primite sunt păstrate pe durata necesară soluționării solicitării tale sau pe o perioadă de maximum 12 luni de la ultimul contact, după care sunt șterse definitiv, cu excepția cazului în care o obligație legală sau contractuală impune păstrarea lor.
+              <strong>Date colectate prin formularul de contact web:</strong> Mesajele și datele de contact primite sunt păstrate pe durata necesară soluționării solicitării tale sau pe o perioadă de maximum 12 luni de la ultimul contact, după care sunt șterse definitiv.
+            </p>
+            <p>
+              <strong>Date de facturare și documente financiar-contabile (emimusic.ro):</strong> În ipoteza încheierii unui contract comercial de servicii, datele fiscale de facturare (CUI, denumire firmă, reprezentant, IBAN, facturi emise) sunt păstrate conform termenelor legale obligatorii stabilite de Legea Contabilității nr. 82/1991 și Codul Fiscal din România (între 5 și 10 ani).
             </p>
           </section>
 
@@ -935,7 +1018,7 @@
             <ul>
               <li><strong>Dreptul de acces (Art. 15):</strong> Poți cere confirmarea dacă datele tale sunt prelucrate și o copie a acestora.</li>
               <li><strong>Dreptul la rectificare (Art. 16):</strong> Poți solicita corectarea datelor inexacte.</li>
-              <li><strong>Dreptul la ștergerea datelor / „dreptul de a fi uitat” (Art. 17):</strong> Poți solicita ștergerea datelor tale din evidențele noastre.</li>
+              <li><strong>Dreptul la ștergerea datelor / „dreptul de a fi uitat” (Art. 17):</strong> Poți solicita ștergerea datelor tale din evidențele noastre (cu excepția celor obligatorii prin legea fiscală).</li>
               <li><strong>Dreptul la restricționarea prelucrării (Art. 18):</strong> Poți cere blocarea temporară a prelucrării.</li>
               <li><strong>Dreptul la portabilitatea datelor (Art. 20):</strong> Poți primi datele într-un format structurat și lizibil.</li>
               <li><strong>Dreptul de a-ți retrage consimțământul:</strong> Oricând, printr-o simplă notificare la raresh554@gmail.com.</li>
@@ -996,34 +1079,60 @@
 
         <!-- TAB 3: TERMENI, CONDIȚII & DREPTURI DE AUTOR -->
         <div class="legal-tab-content" id="tab-termeni">
-          <h3>Termeni și Condiții de Utilizare & Proprietate Intelectuală</h3>
-          <p class="legal-updated">Protecția drepturilor de autor conform Legii nr. 8/1996 privind dreptul de autor și drepturile conexe</p>
+          <h3>Termeni și Condiții de Utilizare & Cadrul Comercial</h3>
+          <p class="legal-updated">Protecția drepturilor de autor conform Legii nr. 8/1996 și comerțul electronic conform Legii nr. 365/2002</p>
 
           <section class="legal-section">
-            <h4>1. Obiectul site-ului</h4>
+            <h4>1. Obiectul site-ului & Servicii Comerciale</h4>
             <p>
-              Acest site constituie portofoliul personal de creație digitală, editare video și strategie de marketing al lui <strong>Gheorgheș Rareș</strong>, creat cu scopul de a prezenta proiectele realizate și de a facilita stabilirea de contacte profesionale.
+              Acest site constituie portofoliul profesional personal al lui <strong>Gheorgheș Rareș</strong>, creat cu scopul de a prezenta proiectele de creație digitală, montaj video TikTok/Reels și strategie de marketing, precum și pentru stabilirea de parteneriate profesionale.
+            </p>
+            <p>
+              <strong>Facturare și Derulare Comercială (emimusic.ro):</strong> Serviciile profesionale de creare de conținut video, grafică și campanii de promovare se contractează pe bază de contract de prestări servicii / cesiune drepturi și <strong>se facturează fiscal în mod obligatoriu prin intermediul entității juridice înregistrate în România ce operează platforma emimusic.ro</strong>.
             </p>
           </section>
 
           <section class="legal-section">
-            <h4>2. Drepturi de autor și proprietate intelectuală</h4>
+            <h4>2. Drepturi de autor și proprietate intelectuală (Legea nr. 8/1996)</h4>
             <p>
               Toate materialele incluse pe acest site — inclusiv, dar fără a se limita la: <strong>clipurile video TikTok și Reels, montajele din CapCut, cadrele de thumbnail, afișele și posterele grafice (Canva/Figma/Kittl), identitatea vizuală și logo-ul grafic „GR”, textele și structura grafică a paginii</strong> — sunt protejate prin legislația privind drepturile de autor (Legea nr. 8/1996 din România) și convențiile internaționale aplicabile.
             </p>
             <p>
-              <strong>Este interzisă:</strong> copierea, descărcarea în scop de re-publicare, vânzarea, reproducerea sau însușirea oricărui material fără consimțământul scris prealabil al titularului de drepturi sau al clienților menționați (Chez Les Amis, See You There Club, emimusic.ro, Thermoso).
+              La livrarea proiectelor contractate, clientul beneficiază de cesiunea drepturilor patrimoniale de autor în condițiile și limitele stipulate expres în contractul încheiat cu entitatea comercială a emimusic.ro. Până la achitarea integrală a facturilor fiscale corespunzătoare, drepturile de autor rămân rezervate creatorului.
+            </p>
+            <p>
+              <strong>Este strict interzisă:</strong> copierea, descărcarea în scop de re-publicare, vânzarea, reproducerea sau însușirea oricărui material fără acordul scris prealabil al titularului de drepturi sau al clienților menționați (Chez Les Amis, See You There Club, emimusic.ro, Thermoso).
             </p>
           </section>
 
           <section class="legal-section">
             <h4>3. Legea aplicabilă și soluționarea disputelor</h4>
             <p>
-              Utilizarea acestui site este supusă legii române. În conformitate cu reglementările europene, utilizatorii sunt informați cu privire la existența platformei europene de Soluționare Online a Litigiilor (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">SOL UE</a>) și a mecanismelor prevăzute de ANPC (<a href="https://anpc.ro/" target="_blank" rel="noopener noreferrer">www.anpc.ro</a>).
+              Utilizarea acestui site este supusă legii române. În conformitate cu reglementările europene, utilizatorii sunt informați cu privire la existența platformei europene de Soluționare Online a Litigiilor (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">SOL UE</a>) și a mecanismelor prevăzute de Autoritatea Națională pentru Protecția Consumatorilor (<a href="https://anpc.ro/" target="_blank" rel="noopener noreferrer">ANPC</a>).
             </p>
           </section>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMAND PALETTE (CMD+K / CTRL+K SPOTLIGHT SEARCH) -->
+  <div class="cmd-palette-modal" id="cmdPaletteModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="cmd-palette-backdrop" id="cmdPaletteBackdrop"></div>
+    <div class="cmd-palette-dialog">
+      <div class="cmd-palette-header">
+        <i class="fa-solid fa-magnifying-glass cmd-palette-icon"></i>
+        <input type="text" class="cmd-palette-input" id="cmdPaletteInput" placeholder="Caută un video, o secțiune sau o acțiune rapidă..." autocomplete="off" spellcheck="false">
+        <kbd class="cmd-palette-esc" id="cmdPaletteCloseKey">ESC</kbd>
+      </div>
+      <div class="cmd-palette-list" id="cmdPaletteList">
+        <!-- Generat dinamic de către JavaScript -->
+      </div>
+      <div class="cmd-palette-footer">
+        <div class="cmd-footer-hint"><span>↑</span><span>↓</span> Navigare</div>
+        <div class="cmd-footer-hint"><span>↵</span> Selectează</div>
+        <div class="cmd-footer-hint"><span>ESC</span> Închide</div>
       </div>
     </div>
   </div>
