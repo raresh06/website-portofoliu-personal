@@ -9,6 +9,15 @@
 
 'use strict';
 
+// Protecție Anti-Clickjacking & Anti-Framing (Frame-Busting)
+if (window.top !== window.self) {
+  try {
+    window.top.location = window.self.location;
+  } catch (e) {
+    window.location = 'about:blank';
+  }
+}
+
 /* ==========================================================================
    1. REGISTRU PROIECTE VIDEO DIN GOOGLE DRIVE (CELE 7 CLIPURI)
    ========================================================================== */
@@ -31,10 +40,10 @@ const PROIECTE_VIDEO = {
   },
   'v-emimusic': {
     id: 'v-emimusic',
-    title: 'Tiktok — Promo Lansare EMIMUSIC5',
+    title: 'Tiktok — Promo Lansare Muzicală',
     category: 'Campanie Muzicală',
-    client: 'emimusic.ro',
-    description: 'Conținut video editat în CapCut pentru canalul emimusic, cu ritm dinamic sincronizat pe beat.',
+    client: 'Promo Muzical',
+    description: 'Conținut video promoțional editat în CapCut pentru canal muzical, cu ritm dinamic sincronizat pe beat.',
     videoUrl: 'https://drive.google.com/file/d/1gRKT7Z-gPzVBbK-OOuFSLy2tgtqwkswD/preview'
   },
   'v-sytc-1': {
@@ -698,42 +707,7 @@ function initLegalModal() {
 }
 
 /* ==========================================================================
-   12. CEAS LIVE & INDICATOR DISPONIBILITATE (IAȘI EUROPE/BUCHAREST)
-   ========================================================================== */
-function initLiveClock() {
-  const timeDisplays = document.querySelectorAll('.live-time-display');
-  if (!timeDisplays.length) return;
-
-  function actualizeazaCeas() {
-    try {
-      const now = new Date();
-      const formatat = now.toLocaleTimeString('ro-RO', {
-        timeZone: 'Europe/Bucharest',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
-      timeDisplays.forEach(el => {
-        el.textContent = formatat;
-      });
-    } catch (e) {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      timeDisplays.forEach(el => {
-        el.textContent = `${h}:${m}:${s}`;
-      });
-    }
-  }
-
-  actualizeazaCeas();
-  setInterval(actualizeazaCeas, 1000);
-}
-
-/* ==========================================================================
-   13. COMMAND PALETTE (CMD+K / CTRL+K SPOTLIGHT SEARCH)
+   12. COMMAND PALETTE (CMD+K / CTRL+K SPOTLIGHT SEARCH)
    ========================================================================== */
 const COMANDI_PALETTE = [
   // Videoclipuri 9:16
@@ -755,10 +729,10 @@ const COMANDI_PALETTE = [
   },
   {
     id: 'v-emimusic',
-    title: 'Tiktok — Promo Lansare EMIMUSIC5',
+    title: 'Tiktok — Promo Lansare Muzicală',
     category: 'Video 9:16',
     icon: 'fa-solid fa-play',
-    keywords: 'emimusic muzica capcut beat ritm lansare promo',
+    keywords: 'muzica promo capcut beat ritm lansare tiktok',
     action: () => { window.modalVideo && window.modalVideo.deschide('v-emimusic'); }
   },
   {
@@ -853,10 +827,10 @@ const COMANDI_PALETTE = [
   },
   {
     id: 'doc-efset',
-    title: 'Vezi: Certificat EF SET C2 Engleză (PDF)',
+    title: 'Vezi: Certificat EF SET C1 Engleză (PDF)',
     category: 'Certificat',
     icon: 'fa-solid fa-award',
-    keywords: 'ef set engleza c2 certificat limbi',
+    keywords: 'ef set engleza c1 certificat limbi',
     action: () => { window.open('https://drive.google.com/file/d/13Eg0R29hQQGtWPJM6xENJZiQUlxEiaWa/view', '_blank', 'noopener,noreferrer'); }
   },
   {
@@ -887,13 +861,13 @@ const COMANDI_PALETTE = [
     keywords: 'whatsapp mesaj chat telefon',
     action: () => { window.open('https://wa.me/40730148593', '_blank', 'noopener,noreferrer'); }
   },
-  // Legal & emimusic.ro
+  // Documente Legale & GDPR
   {
     id: 'leg-conf',
     title: 'Deschide: Politică de Confidențialitate (GDPR)',
     category: 'Legal',
     icon: 'fa-solid fa-user-shield',
-    keywords: 'gdpr confidentialitate date personale securitate anspdcp',
+    keywords: 'gdpr confidentialitate date personale securitate',
     action: () => {
       const modal = document.getElementById('legalModal');
       if (modal) {
@@ -926,10 +900,10 @@ const COMANDI_PALETTE = [
   },
   {
     id: 'leg-termeni',
-    title: 'Deschide: Termeni, Drepturi de Autor & Facturare emimusic.ro',
-    category: 'Legal & Fiscal',
+    title: 'Deschide: Termeni & Drepturi de Autor',
+    category: 'Legal',
     icon: 'fa-solid fa-file-contract',
-    keywords: 'termeni drepturi autor emimusic firma facturare contract fiscal legea 8/1996 anpc',
+    keywords: 'termeni drepturi autor proprietate intelectuala legea 8/1996 blog',
     action: () => {
       const modal = document.getElementById('legalModal');
       if (modal) {
@@ -1116,7 +1090,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollQOL();
   initCookieConsent();
   initLegalModal();
-  initLiveClock();
   initCommandPalette();
   window.modalVideo = new ControlerModalVideo();
   window.modalImagine = new ControlerImageLightbox();
