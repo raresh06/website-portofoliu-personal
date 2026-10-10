@@ -7,7 +7,7 @@
   <meta name="description" content="Portofoliul personal al lui Gheorgheș Rareș (GR). Student Marketing FEAA Iași & Creator de Conținut Digital. Campanii video TikTok/Reels 9:16, grafică social media și strategie de marketing.">
 
   <!-- Politici de Securitate Web & Protecție Anti-Doxxing -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; frame-src 'self' https://drive.google.com; media-src 'self' https://drive.google.com blob:; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; frame-src 'self' https://drive.google.com; media-src 'self' https://drive.google.com blob:; connect-src 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -131,6 +131,16 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-section" id="acasa">
+      <!-- Efecte Vizuale Dinamice Fundal (Aurora Glow, Particule & Mesh) -->
+      <div class="hero-bg-fx" aria-hidden="true">
+        <canvas class="hero-particles-canvas" id="heroParticlesCanvas"></canvas>
+        <div class="hero-aurora-orb hero-orb-1"></div>
+        <div class="hero-aurora-orb hero-orb-2"></div>
+        <div class="hero-aurora-orb hero-orb-3"></div>
+        <div class="hero-grid-mesh"></div>
+        <div class="hero-mouse-spotlight" id="heroMouseSpotlight"></div>
+      </div>
+
       <div class="container hero-layout">
         <div class="hero-intro">
           

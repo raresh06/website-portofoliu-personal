@@ -462,11 +462,147 @@ body.cursor-hover .cursor-circle {
 
 /* --- HERO SECTION --- */
 .hero-section {
+  position: relative;
+  overflow: hidden;
   padding: clamp(3.5rem, 6vw, 5.5rem) 0 clamp(3rem, 5vw, 4.5rem);
   border-bottom: 1px solid var(--border-light);
+  background: radial-gradient(circle at 50% 20%, #151517 0%, #111112 100%);
+}
+
+/* Efecte Vizuale Dinamice de Fundal (Hero FX) */
+.hero-bg-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Orbi Ambientali de Lumină Fluidă (Aurora Effect) */
+.hero-aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(95px);
+  -webkit-filter: blur(95px);
+  will-change: transform, opacity;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero-orb-1 {
+  width: clamp(350px, 45vw, 680px);
+  height: clamp(350px, 45vw, 680px);
+  top: -12%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.32) 0%, rgba(99, 102, 241, 0.18) 45%, transparent 70%);
+  animation: floatOrb1 16s ease-in-out infinite alternate;
+}
+
+.hero-orb-2 {
+  width: clamp(320px, 40vw, 600px);
+  height: clamp(320px, 40vw, 600px);
+  top: 10%;
+  right: -6%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(217, 119, 6, 0.12) 50%, transparent 70%);
+  animation: floatOrb2 20s ease-in-out infinite alternate;
+}
+
+.hero-orb-3 {
+  width: clamp(300px, 35vw, 540px);
+  height: clamp(300px, 35vw, 540px);
+  bottom: -20%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.22) 0%, rgba(13, 148, 136, 0.10) 50%, transparent 70%);
+  animation: floatOrb3 18s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(55px, 40px) scale(1.12);
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate(-30px, 60px) scale(0.95);
+    opacity: 0.4;
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-45px, -35px) scale(1.15);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(35px, 45px) scale(0.92);
+    opacity: 0.35;
+  }
+}
+
+@keyframes floatOrb3 {
+  0% {
+    transform: translate(0, 0) scale(0.95);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-35px, -25px) scale(1.1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(45px, -40px) scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* Grilă Minimalistă de Puncte Tehnice (Subtle Tech Texture) */
+.hero-grid-mesh {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 25%, transparent 80%);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cursor Interactive Spotlight */
+.hero-mouse-spotlight {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  margin-top: -260px;
+  margin-left: -260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(139, 92, 246, 0.035) 40%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  will-change: transform;
 }
 
 .hero-layout {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1.25fr 0.85fr;
   gap: clamp(2rem, 4vw, 4rem);
