@@ -261,37 +261,27 @@ body.cursor-hover .cursor-circle {
   justify-content: space-between;
 }
 
-/* Monogram Logo GR (MAI MARE, BOLD & LUXURY EDITORIAL) */
+/* Logo Personalizat GR (assets/logo.png) */
 .brand-monogram {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.15rem;
+  align-items: center;
   text-decoration: none;
   user-select: none;
   transition: opacity var(--transition), transform var(--transition);
 }
 
 .brand-monogram:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
+  opacity: 0.85;
+  transform: scale(1.04);
 }
 
-.monogram-text {
-  font-family: var(--font-serif);
-  font-size: 2.75rem;
-  font-weight: 600;
-  font-style: italic;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  color: #ffffff;
-}
-
-.monogram-accent {
-  font-size: 0.9rem;
-  color: #b5b5b0;
-  position: relative;
-  top: -0.65rem;
-  margin-left: 0.1rem;
+.brand-logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
 }
 
 .nav-menu .nav-links {
@@ -410,31 +400,22 @@ body.cursor-hover .cursor-circle {
   border-bottom: 1px solid var(--border-light);
 }
 
-.mobile-avatar-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+.mobile-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
 }
 
-.mobile-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
-
-.brand-monogram-mobile {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-style: italic;
-  color: #ffffff;
-  line-height: 1;
+.mobile-logo-img {
+  height: 46px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  display: block;
 }
 
 .mobile-user-name {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   display: block;
 }
@@ -492,25 +473,7 @@ body.cursor-hover .cursor-circle {
   align-items: center;
 }
 
-/* Badge citat în Hero */
-.hero-quote-badge {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
 
-.hero-quote-badge .mono-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.85rem;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-full);
-  margin-bottom: 0;
-  font-size: 0.72rem;
-  color: #d1d1cd;
-}
 
 .hero-heading {
   font-family: var(--font-serif);
@@ -1412,10 +1375,50 @@ body.cursor-hover .cursor-circle {
   color: #f87171;
 }
 
+/* Checkbox Consimțământ GDPR în Formular */
+.form-checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.form-checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  accent-color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.form-checkbox-group label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.legal-inline-trigger {
+  background: none;
+  border: none;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.legal-inline-trigger:hover {
+  color: #e2e2df;
+}
+
 /* --- FOOTER --- */
 .site-footer {
   border-top: 1px solid var(--border-light);
-  padding: 3rem 0;
+  padding: 3.5rem 0 3rem;
   font-size: 0.88rem;
   color: var(--text-faint);
 }
@@ -1423,38 +1426,89 @@ body.cursor-hover .cursor-circle {
 .footer-layout {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .footer-profile-mini {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   margin-bottom: 0.5rem;
 }
 
-.footer-avatar-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+/* Link-uri Legale & ANPC / ANSPDCP în Footer */
+.footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
 }
 
-.footer-brand-mono {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-style: italic;
+.footer-legal-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.footer-legal-btn:hover {
   color: #ffffff;
+  text-decoration: underline;
+}
+
+.legal-dot {
+  color: var(--border-medium);
+  font-size: 0.7rem;
+}
+
+.footer-official-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.15rem;
+}
+
+.official-compliance-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  transition: all var(--transition);
+}
+
+.official-compliance-tag:hover {
+  color: #ffffff;
+  border-color: var(--border-hover);
+  background-color: var(--bg-subtle);
+  transform: translateY(-1px);
+}
+
+.footer-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
   display: block;
 }
 
 .footer-name {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: #ffffff;
 }
@@ -1654,6 +1708,246 @@ body.cursor-hover .cursor-circle {
   opacity: 1;
 }
 
+/* --- BANNER COOKIE-URI (GDPR) --- */
+.cookie-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(140%);
+  width: min(92vw, 840px);
+  background-color: rgba(24, 24, 26, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.65rem;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75);
+  z-index: 10000;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cookie-banner.active {
+  transform: translateX(-50%) translateY(0);
+}
+
+.cookie-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+}
+
+.cookie-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cookie-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cookie-banner-text p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cookie-policy-inline-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* --- MODAL DOCUMENTE LEGALE (GDPR, COOKIES, TERMENI) --- */
+.legal-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.legal-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.legal-modal-dialog {
+  width: 100%;
+  max-width: 860px;
+  max-height: 88vh;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+}
+
+.legal-modal-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: #141416;
+}
+
+.legal-tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legal-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+
+.legal-tab-btn:hover {
+  color: #ffffff;
+  background-color: var(--bg-subtle);
+}
+
+.legal-tab-btn.active {
+  color: #ffffff;
+  background-color: #232326;
+  border-color: var(--border-medium);
+}
+
+.legal-modal-body {
+  padding: 2rem 2.25rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.legal-tab-content {
+  display: none;
+}
+
+.legal-tab-content.active {
+  display: block;
+}
+
+.legal-tab-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.legal-updated {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.legal-section {
+  margin-bottom: 1.75rem;
+}
+
+.legal-section h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.legal-section p {
+  margin-bottom: 0.75rem;
+}
+
+.legal-section ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal-section li {
+  margin-bottom: 0.45rem;
+}
+
+.legal-section a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.82rem;
+}
+
+.legal-table th,
+.legal-table td {
+  padding: 0.75rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.legal-table th {
+  color: #ffffff;
+  font-family: var(--font-mono);
+  background-color: #121213;
+}
+
+.legal-table code {
+  font-family: var(--font-mono);
+  background-color: #222225;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+  color: #ffffff;
+}
+
 /* --- BUTON PLUTITOR ÎNAPOI SUS (QOL) --- */
 .back-to-top-btn {
   position: fixed;
@@ -1741,8 +2035,8 @@ body.cursor-hover .cursor-circle {
     display: flex;
   }
 
-  .monogram-text {
-    font-size: 2.25rem;
+  .brand-logo-img {
+    height: 40px;
   }
 
   .hero-heading {
@@ -1787,6 +2081,16 @@ body.cursor-hover .cursor-circle {
     gap: 2rem;
   }
 
+  .footer-legal-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .legal-dot {
+    display: none;
+  }
+
   .footer-right {
     align-items: flex-start;
   }
@@ -1797,12 +2101,40 @@ body.cursor-hover .cursor-circle {
     width: 42px;
     height: 42px;
   }
+
+  .cookie-banner {
+    bottom: 1rem;
+    padding: 1.15rem;
+    width: 95vw;
+  }
+
+  .cookie-banner-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .cookie-banner-actions {
+    flex-direction: column;
+  }
+
+  .cookie-banner-actions .btn {
+    width: 100%;
+  }
+
+  .legal-modal-dialog {
+    max-height: 92vh;
+  }
+
+  .legal-modal-body {
+    padding: 1.35rem 1.25rem;
+  }
 }
 
 /* TELEFOANE FOARTE MICI (SUB 420px) */
 @media (max-width: 420px) {
-  .monogram-text {
-    font-size: 1.95rem;
+  .brand-logo-img {
+    height: 35px;
   }
 
   .hero-heading {

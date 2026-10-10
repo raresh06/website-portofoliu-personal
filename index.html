@@ -16,6 +16,12 @@
 
   <!-- Stiluri personalizate -->
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon Logo Personal (Optimizat Mare & Clar) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="shortcut icon" href="assets/favicon.png">
 </head>
 <body>
 
@@ -30,10 +36,9 @@
   <header class="site-header" id="header">
     <div class="container header-inner">
       
-      <!-- LOGO FANCY 'GR' (MONOGRAM MAI MARE ȘI BOLD, FĂRĂ AVATAR) -->
+      <!-- LOGO PERSONALIZAT GR (ASSETS/LOGO.PNG) -->
       <a href="#acasa" class="brand-monogram" aria-label="Gheorgheș Rareș - Acasă">
-        <span class="monogram-text">GR</span>
-        <span class="monogram-accent">✦</span>
+        <img src="assets/logo.png" alt="GR Logo" class="brand-logo-img">
       </a>
 
       <!-- Meniu principal desktop -->
@@ -68,7 +73,7 @@
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-header-brand">
       <div class="mobile-brand-group">
-        <span class="brand-monogram-mobile">GR✦</span>
+        <img src="assets/logo.png" alt="GR Logo" class="mobile-logo-img">
         <span class="mobile-user-name">Gheorgheș Rareș • Portofoliu</span>
       </div>
     </div>
@@ -98,10 +103,6 @@
     <section class="hero-section" id="acasa">
       <div class="container hero-layout">
         <div class="hero-intro">
-          
-          <div class="hero-quote-badge">
-            <span class="mono-label"><i class="fa-solid fa-quote-left"></i> Filosofie & Viziune</span>
-          </div>
           
           <h1 class="hero-heading hero-quote-heading">
             „Arta nu este ceea ce vezi, ci ceea ce îi faci pe ceilalți să vadă.”
@@ -737,6 +738,14 @@
                 <textarea id="mesaj" name="mesaj" rows="4" placeholder="Salut Rareș, aș dori să discutăm despre o colaborare pe video / marketing..."></textarea>
               </div>
 
+              <!-- Checkbox Consimțământ GDPR (Obligatoriu conform Regulamentului UE 2016/679) -->
+              <div class="form-checkbox-group">
+                <input type="checkbox" id="gdprConsent" name="gdprConsent" required>
+                <label for="gdprConsent">
+                  Sunt de acord cu prelucrarea datelor mele (nume, email) conform <button type="button" class="legal-inline-trigger open-legal-btn" data-legal-tab="confidentialitate">Politicii de Confidențialitate</button>, exclusiv pentru a primi un răspuns la acest mesaj.
+                </label>
+              </div>
+
               <button type="submit" class="btn btn-primary btn-full" id="submitFormBtn">
                 Trimite mesajul
               </button>
@@ -754,15 +763,38 @@
     <div class="container footer-layout">
       <div class="footer-left">
         <div class="footer-profile-mini">
-          <span class="footer-brand-mono">GR✦</span>
+          <img src="assets/logo.png" alt="GR Logo" class="footer-logo-img">
           <span class="footer-name">Gheorgheș Rareș</span>
         </div>
         <p class="footer-text">Portofoliu personal de marketing și conținut digital • Iași, România</p>
+
+        <!-- Link-uri Legale & Conformitate România / UE -->
+        <div class="footer-legal-links">
+          <button type="button" class="footer-legal-btn open-legal-btn" data-legal-tab="confidentialitate">Politică de Confidențialitate (GDPR)</button>
+          <span class="legal-dot">•</span>
+          <button type="button" class="footer-legal-btn open-legal-btn" data-legal-tab="cookie">Politică de Cookie-uri</button>
+          <span class="legal-dot">•</span>
+          <button type="button" class="footer-legal-btn open-legal-btn" data-legal-tab="termeni">Termeni & Drepturi de Autor</button>
+          <span class="legal-dot">•</span>
+          <button type="button" class="footer-legal-btn" id="footerCookieSettingsBtn">Preferințe Cookie-uri</button>
+        </div>
+
+        <div class="footer-official-badges">
+          <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener noreferrer" class="official-compliance-tag" title="Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal">
+            <i class="fa-solid fa-shield-halved"></i> ANSPDCP
+          </a>
+          <a href="https://anpc.ro/" target="_blank" rel="noopener noreferrer" class="official-compliance-tag" title="Autoritatea Națională pentru Protecția Consumatorilor">
+            <i class="fa-solid fa-scale-balanced"></i> ANPC
+          </a>
+          <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="official-compliance-tag" title="Platforma Europeană de Soluționare Online a Litigiilor">
+            <i class="fa-solid fa-landmark"></i> SOL UE
+          </a>
+        </div>
       </div>
 
       <div class="footer-right">
         <a href="#acasa">Înapoi sus &uarr;</a>
-        <p class="footer-copy">&copy; 2026 Gheorgheș Rareș. Toate materialele sunt proprietatea autorului.</p>
+        <p class="footer-copy">&copy; 2026 Gheorgheș Rareș. Toate drepturile rezervate conform Legii nr. 8/1996 și Regulamentului (UE) 2016/679 (GDPR).</p>
       </div>
     </div>
   </footer>
@@ -806,6 +838,192 @@
       </div>
       <div class="lightbox-body">
         <img src="" alt="" id="lightboxImg">
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER DE CONSIMȚĂMÂNT COOKIE-URI (GDPR & DIRECTIVA ePRIVACY) -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Gestionare Cookie-uri">
+    <div class="cookie-banner-content">
+      <div class="cookie-banner-text">
+        <div class="cookie-badge">
+          <i class="fa-solid fa-cookie-bite"></i> Confidențialitate & Cookie-uri (GDPR)
+        </div>
+        <p>
+          Acest site utilizează module cookie strict necesare pentru funcționarea tehnică și servicii terțe integrate (Google Drive video embed) pentru redarea portofoliului. Respectăm confidențialitatea datelor tale conform Regulamentului (UE) 2016/679 (GDPR). Poți alege ce module permiți sau poți consulta <button type="button" class="cookie-policy-inline-btn open-legal-btn" data-legal-tab="cookie">Politica de Cookie-uri</button>.
+        </p>
+      </div>
+      <div class="cookie-banner-actions">
+        <button type="button" class="btn btn-sm btn-outline" id="essentialCookiesBtn">Doar esențiale</button>
+        <button type="button" class="btn btn-sm btn-primary" id="acceptAllCookiesBtn">Acceptă toate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL COMPLET PENTRU DOCUMENTE LEGALE (GDPR, COOKIES, TERMENI) -->
+  <div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="legal-modal-dialog">
+      <div class="legal-modal-header">
+        <div class="legal-tabs-nav">
+          <button type="button" class="legal-tab-btn active" data-target="tab-confidentialitate">
+            <i class="fa-solid fa-user-shield"></i> Confidențialitate (GDPR)
+          </button>
+          <button type="button" class="legal-tab-btn" data-target="tab-cookie">
+            <i class="fa-solid fa-cookie"></i> Politică Cookie-uri
+          </button>
+          <button type="button" class="legal-tab-btn" data-target="tab-termeni">
+            <i class="fa-solid fa-file-contract"></i> Termeni & Drepturi Autor
+          </button>
+        </div>
+        <button type="button" class="modal-close" id="legalModalClose" aria-label="Închide fereastra legală">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="legal-modal-body">
+        
+        <!-- TAB 1: POLITICĂ DE CONFIDENȚIALITATE (GDPR) -->
+        <div class="legal-tab-content active" id="tab-confidentialitate">
+          <h3>Politică de Confidențialitate și Protecția Datelor (GDPR)</h3>
+          <p class="legal-updated">Ultima actualizare: Octombrie 2026 • În conformitate cu Regulamentul (UE) 2016/679 (GDPR) și Legea nr. 190/2018</p>
+
+          <section class="legal-section">
+            <h4>1. Operatorul de date cu caracter personal</h4>
+            <p>
+              Operatorul datelor prelucrate prin intermediul acestui site este <strong>Gheorgheș Rareș</strong>, persoană fizică, student la Facultatea de Economie și Administrarea Afacerilor (FEAA), Universitatea „Alexandru Ioan Cuza” din Iași și Digital Content Creator la emimusic.ro, cu reședința în Iași, România.
+            </p>
+            <p>
+              Pentru orice solicitare privind datele tale personale, mă poți contacta direct la email: <strong>raresh554@gmail.com</strong> sau telefon / WhatsApp: <strong>+40 730 148 593</strong>.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>2. Categoriile de date colectate și scopul prelucrării</h4>
+            <ul>
+              <li><strong>Nume și adresă de email:</strong> Colectate exclusiv atunci când completezi voluntar formularul de contact sau transmiți un email direct. <em>Scop:</em> Răspunsul la mesajele tale, formularea de oferte sau discutarea proiectelor profesionale de marketing și creare de conținut video.</li>
+              <li><strong>Număr de telefon:</strong> În situația în care alegi să inițiezi un apel telefonic sau o conversație pe WhatsApp. <em>Scop:</em> Comunicare rapidă directă.</li>
+              <li><strong>Date tehnice de navigare:</strong> Informații de bază transmise de browser (adresă IP, tip dispozitiv, pagini vizualizate) strict pentru funcționarea tehnică și securitatea platformei.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h4>3. Temeiul juridic al prelucrării</h4>
+            <ul>
+              <li><strong>Art. 6 alin. (1) lit. (a) GDPR:</strong> Consimțământul tău expres, acordat prin bifarea căsuței din formularul de contact sau acceptarea modulelor cookie.</li>
+              <li><strong>Art. 6 alin. (1) lit. (b) GDPR:</strong> Efectuarea de demersuri la cererea persoanei vizate înainte de încheierea unui contract de prestări servicii / colaborare.</li>
+              <li><strong>Art. 6 alin. (1) lit. (f) GDPR:</strong> Interesul legitim de a asigura integritatea și securitatea site-ului web.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h4>4. Destinatari și securitatea datelor</h4>
+            <p>
+              Datele tale personale <strong>nu sunt vândute, înstrăinate sau transmise către terți în scopuri publicitare</strong>. Datele sunt accesate exclusiv de către Gheorgheș Rareș pe echipamente securizate cu parolă și autentificare în doi pași. Anumite servicii tehnice externe de încredere (Google Workspace / Drive pentru afișarea fișierelor publice și furnizorul de hosting) pot procesa date tehnice minime în deplină conformitate cu clauzele contractuale standard ale UE.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>5. Perioada de păstrare a datelor</h4>
+            <p>
+              Mesajele și datele de contact primite sunt păstrate pe durata necesară soluționării solicitării tale sau pe o perioadă de maximum 12 luni de la ultimul contact, după care sunt șterse definitiv, cu excepția cazului în care o obligație legală sau contractuală impune păstrarea lor.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>6. Drepturile tale conform Regulamentului (UE) 2016/679</h4>
+            <p>În conformitate cu GDPR, beneficiezi de următoarele drepturi:</p>
+            <ul>
+              <li><strong>Dreptul de acces (Art. 15):</strong> Poți cere confirmarea dacă datele tale sunt prelucrate și o copie a acestora.</li>
+              <li><strong>Dreptul la rectificare (Art. 16):</strong> Poți solicita corectarea datelor inexacte.</li>
+              <li><strong>Dreptul la ștergerea datelor / „dreptul de a fi uitat” (Art. 17):</strong> Poți solicita ștergerea datelor tale din evidențele noastre.</li>
+              <li><strong>Dreptul la restricționarea prelucrării (Art. 18):</strong> Poți cere blocarea temporară a prelucrării.</li>
+              <li><strong>Dreptul la portabilitatea datelor (Art. 20):</strong> Poți primi datele într-un format structurat și lizibil.</li>
+              <li><strong>Dreptul de a-ți retrage consimțământul:</strong> Oricând, printr-o simplă notificare la raresh554@gmail.com.</li>
+            </ul>
+            <p>
+              Dacă consideri că drepturile tale au fost încălcate, ai dreptul de a depune o plângere către autoritatea de supraveghere din România: <strong>Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP)</strong>, B-dul G-ral. Gheorghe Magheru 28-30, Sector 1, București, e-mail: anspdcp@dataprotection.ro, web: <a href="https://www.dataprotection.ro" target="_blank" rel="noopener noreferrer">www.dataprotection.ro</a>.
+            </p>
+          </section>
+        </div>
+
+        <!-- TAB 2: POLITICĂ DE COOKIE-URI -->
+        <div class="legal-tab-content" id="tab-cookie">
+          <h3>Politică privind Utilizarea Modulelor Cookie</h3>
+          <p class="legal-updated">În conformitate cu Directiva 2002/58/CE (ePrivacy) și Regulamentul (UE) 2016/679 (GDPR)</p>
+
+          <section class="legal-section">
+            <h4>1. Ce sunt modulele cookie?</h4>
+            <p>
+              Cookie-urile sunt mici fișiere text descărcate pe dispozitivul tău (computer, telefon sau tabletă) la accesarea site-ului. Acestea permit site-ului să rețină preferințele tale (cum ar fi acceptarea bannerului de confidențialitate) și să asigure funcționarea corectă a elementelor interactive.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>2. Modulele cookie utilizate pe acest site</h4>
+            <table class="legal-table">
+              <thead>
+                <tr>
+                  <th>Denumire</th>
+                  <th>Categorie</th>
+                  <th>Scopul utilizării</th>
+                  <th>Durată</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>cookie_consent_status</code></td>
+                  <td>Strict Necesar (First-party)</td>
+                  <td>Reține consimțământul tău pentru cookie-uri (esențiale sau toate)</td>
+                  <td>12 luni</td>
+                </tr>
+                <tr>
+                  <td><code>Google Drive Embed</code></td>
+                  <td>Funcțional (Terță parte)</td>
+                  <td>Permite redarea în fereastră modală a clipurilor video 9:16 din Google Drive</td>
+                  <td>Sesiune / Terță parte</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="legal-section">
+            <h4>3. Cum poți administra cookie-urile?</h4>
+            <p>
+              Poți modifica oricând preferințele apăsând butonul <strong>„Preferințe Cookie-uri”</strong> din subsolul paginii. De asemenea, poți șterge sau bloca cookie-urile direct din setările browserului tău (Chrome, Safari, Firefox sau Edge).
+            </p>
+          </section>
+        </div>
+
+        <!-- TAB 3: TERMENI, CONDIȚII & DREPTURI DE AUTOR -->
+        <div class="legal-tab-content" id="tab-termeni">
+          <h3>Termeni și Condiții de Utilizare & Proprietate Intelectuală</h3>
+          <p class="legal-updated">Protecția drepturilor de autor conform Legii nr. 8/1996 privind dreptul de autor și drepturile conexe</p>
+
+          <section class="legal-section">
+            <h4>1. Obiectul site-ului</h4>
+            <p>
+              Acest site constituie portofoliul personal de creație digitală, editare video și strategie de marketing al lui <strong>Gheorgheș Rareș</strong>, creat cu scopul de a prezenta proiectele realizate și de a facilita stabilirea de contacte profesionale.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>2. Drepturi de autor și proprietate intelectuală</h4>
+            <p>
+              Toate materialele incluse pe acest site — inclusiv, dar fără a se limita la: <strong>clipurile video TikTok și Reels, montajele din CapCut, cadrele de thumbnail, afișele și posterele grafice (Canva/Figma/Kittl), identitatea vizuală și logo-ul grafic „GR”, textele și structura grafică a paginii</strong> — sunt protejate prin legislația privind drepturile de autor (Legea nr. 8/1996 din România) și convențiile internaționale aplicabile.
+            </p>
+            <p>
+              <strong>Este interzisă:</strong> copierea, descărcarea în scop de re-publicare, vânzarea, reproducerea sau însușirea oricărui material fără consimțământul scris prealabil al titularului de drepturi sau al clienților menționați (Chez Les Amis, See You There Club, emimusic.ro, Thermoso).
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h4>3. Legea aplicabilă și soluționarea disputelor</h4>
+            <p>
+              Utilizarea acestui site este supusă legii române. În conformitate cu reglementările europene, utilizatorii sunt informați cu privire la existența platformei europene de Soluționare Online a Litigiilor (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">SOL UE</a>) și a mecanismelor prevăzute de ANPC (<a href="https://anpc.ro/" target="_blank" rel="noopener noreferrer">www.anpc.ro</a>).
+            </p>
+          </section>
+        </div>
+
       </div>
     </div>
   </div>

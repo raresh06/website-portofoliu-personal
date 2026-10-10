@@ -345,7 +345,7 @@ function initMeniuSiContact() {
     });
   }
 
-  // Formular de contact
+  // Formular de contact (cu validare GDPR conform Regulamentului UE 2016/679)
   const form = document.getElementById('contactForm');
   const formAlert = document.getElementById('formAlert');
 
@@ -355,9 +355,16 @@ function initMeniuSiContact() {
 
       const nume = document.getElementById('nume').value.trim();
       const email = document.getElementById('email').value.trim();
+      const gdprCheckbox = document.getElementById('gdprConsent');
 
       if (!nume || !email) {
         formAlert.textContent = 'Te rog să introduci numele și adresa de email.';
+        formAlert.className = 'form-alert error';
+        return;
+      }
+
+      if (gdprCheckbox && !gdprCheckbox.checked) {
+        formAlert.textContent = 'Te rog să bifezi acordul pentru prelucrarea datelor conform Politicii de Confidențialitate (GDPR).';
         formAlert.className = 'form-alert error';
         return;
       }
@@ -455,6 +462,128 @@ function initScrollQOL() {
 }
 
 /* ==========================================================================
+   10. GESTIUNE CONSIMȚĂMÂNT COOKIE-URI (GDPR & DIRECTIVA ePRIVACY)
+   ========================================================================== */
+function initCookieConsent() {
+  const banner = document.getElementById('cookieBanner');
+  const acceptAllBtn = document.getElementById('acceptAllCookiesBtn');
+  const essentialBtn = document.getElementById('essentialCookiesBtn');
+  const footerSettingsBtn = document.getElementById('footerCookieSettingsBtn');
+
+  if (!banner) return;
+
+  const status = localStorage.getItem('cookie_consent_status');
+
+  // Afișează bannerul dacă vizitatorul nu a făcut o alegere anterioară
+  if (!status) {
+    setTimeout(() => {
+      banner.classList.add('active');
+    }, 700);
+  }
+
+  if (acceptAllBtn) {
+    acceptAllBtn.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent_status', 'all');
+      banner.classList.remove('active');
+      afiseazaToast('Preferințele au fost salvate (Toate cookie-urile acceptate).');
+    });
+  }
+
+  if (essentialBtn) {
+    essentialBtn.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent_status', 'essential');
+      banner.classList.remove('active');
+      afiseazaToast('Preferințele au fost salvate (Doar cookie-uri strict necesare).');
+    });
+  }
+
+  if (footerSettingsBtn) {
+    footerSettingsBtn.addEventListener('click', () => {
+      banner.classList.add('active');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+}
+
+/* ==========================================================================
+   11. MODAL DOCUMENTE LEGALE (GDPR, COOKIES, TERMENI & DREPTURI AUTOR)
+   ========================================================================== */
+function initLegalModal() {
+  const modal = document.getElementById('legalModal');
+  const closeBtn = document.getElementById('legalModalClose');
+  const triggers = document.querySelectorAll('.open-legal-btn');
+  const tabBtns = document.querySelectorAll('.legal-tab-btn');
+  const tabContents = document.querySelectorAll('.legal-tab-content');
+
+  if (!modal) return;
+
+  function switchTab(tabId) {
+    tabBtns.forEach(btn => {
+      if (btn.getAttribute('data-target') === tabId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    tabContents.forEach(content => {
+      if (content.id === tabId) {
+        content.classList.add('active');
+      } else {
+        content.classList.remove('active');
+      }
+    });
+  }
+
+  function openLegal(targetTabName) {
+    let targetTabId = 'tab-confidentialitate';
+    if (targetTabName === 'cookie') {
+      targetTabId = 'tab-cookie';
+    } else if (targetTabName === 'termeni') {
+      targetTabId = 'tab-termeni';
+    }
+
+    switchTab(targetTabId);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLegal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tabName = btn.getAttribute('data-legal-tab') || 'confidentialitate';
+      openLegal(tabName);
+    });
+  });
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      if (targetId) switchTab(targetId);
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeLegal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeLegal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeLegal();
+    }
+  });
+}
+
+/* ==========================================================================
    PORNIRE LA ÎNCĂRCAREA PAGINII
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -462,8 +591,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initFiltre();
   initMeniuSiContact();
   initScrollQOL();
+  initCookieConsent();
+  initLegalModal();
   window.modalVideo = new ControlerModalVideo();
   window.modalImagine = new ControlerImageLightbox();
 
-  console.log('Portofoliu personal GR — cele 7 clipuri video active în player vertical 9:16.');
+  console.log('Portofoliu personal GR — conformitate GDPR, Cookie consent & cele 7 clipuri video active.');
 });
