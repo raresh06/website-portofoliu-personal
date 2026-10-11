@@ -117,6 +117,7 @@ class ControlerModalVideo {
     this.desc = document.getElementById('modalDescription');
     this.closeBtn = document.getElementById('modalClose');
     this.copyBtn = document.getElementById('modalCopyLinkBtn');
+    this.driveBtn = document.getElementById('modalDriveLink');
     this.prevBtn = document.getElementById('modalPrevBtn');
     this.nextBtn = document.getElementById('modalNextBtn');
     this.indexBadge = document.getElementById('videoModalIndex');
@@ -217,11 +218,19 @@ class ControlerModalVideo {
 
     const sursa = analizeazaSursaVideo(proiect.videoUrl);
 
+    if (this.driveBtn) {
+      const directUrl = sursa.tip === 'drive'
+        ? proiect.videoUrl.replace('/preview', '/view')
+        : sursa.url;
+      this.driveBtn.href = directUrl;
+    }
+
     this.frame.innerHTML = `
       <iframe 
         src="${sursa.url}" 
-        allow="autoplay; fullscreen" 
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
         allowfullscreen 
+        loading="lazy"
         title="${proiect.title}"
         style="width: 100%; height: 100%; border: none;">
       </iframe>
