@@ -635,7 +635,6 @@ function initCookieConsent() {
     acceptAllBtn.addEventListener('click', () => {
       localStorage.setItem('cookie_consent_status', 'all');
       banner.classList.remove('active');
-      afiseazaToast('Preferințele au fost salvate (Toate cookie-urile acceptate).');
     });
   }
 
@@ -643,7 +642,6 @@ function initCookieConsent() {
     essentialBtn.addEventListener('click', () => {
       localStorage.setItem('cookie_consent_status', 'essential');
       banner.classList.remove('active');
-      afiseazaToast('Preferințele au fost salvate (Doar cookie-uri strict necesare).');
     });
   }
 
@@ -1175,20 +1173,19 @@ function initHeroArtAtelier() {
    14. SECURITATE AVANSATĂ: ANTI-INSPECT, ANTI-DEVTOOLS & DREPTURI DE AUTOR
    ========================================================================== */
 function initSecurityProtections() {
-  // 1. Alertă de securitate în DevTools Console
+  // 1. Alertă de securitate discretă în DevTools Console
   try {
-    const bannerStyle = 'color: #f59e0b; font-size: 15px; font-weight: bold; background: #161618; padding: 6px 14px; border-radius: 4px; border: 1px solid #d97706;';
-    const subStyle = 'color: #a1a1aa; font-size: 12px; line-height: 1.6;';
-    console.log('%c🔒 ZONĂ SECURIZATĂ — PORTOFOLIU GHEORGHEȘ RAREȘ (GR)', bannerStyle);
-    console.log('%cConținutul multimedia, montajele video și codul sursă sunt protejate prin drepturi de autor conform Legii nr. 8/1996.\nInspectarea și extragerea neautorizată de active sunt restricționate.', subStyle);
+    const bannerStyle = 'color: #c5a059; font-size: 14px; font-weight: bold; background: #161618; padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.4);';
+    const subStyle = 'color: #888884; font-size: 11px; line-height: 1.5;';
+    console.log('%c🔒 PORTFOLIO — GHEORGHEȘ RAREȘ (GR)', bannerStyle);
+    console.log('%cAll multimedia assets, video edits and source code are protected by copyright laws.\nUnauthorized extraction or inspection is restricted.', subStyle);
   } catch (err) {}
 
-  // 2. Blocare comenzi de tastatură pentru Inspect Element, View Source & Console
+  // 2. Blocare comenzi de tastatură pentru Inspect Element, View Source & Console (silențios, fără pop-up)
   window.addEventListener('keydown', (e) => {
     // F12
     if (e.key === 'F12' || e.keyCode === 123) {
       e.preventDefault();
-      afiseazaToast('🛡️ Accesul la consola de dezvoltare este restricționat.');
       return false;
     }
 
@@ -1199,14 +1196,12 @@ function initSecurityProtections() {
 
     if (isDevToolsCombo) {
       e.preventDefault();
-      afiseazaToast('🛡️ Inspectarea elementelor este dezactivată pentru protecția codului.');
       return false;
     }
 
     // Ctrl+U / Cmd+Option+U (Vizualizare sursă brută pagină)
     if ((e.ctrlKey && (e.key === 'u' || e.key === 'U')) || (isMac && e.metaKey && e.altKey && (e.key === 'u' || e.key === 'U'))) {
       e.preventDefault();
-      afiseazaToast('🛡️ Vizualizarea codului sursă brut este restricționată.');
       return false;
     }
 
@@ -1217,17 +1212,16 @@ function initSecurityProtections() {
     }
   }, { capture: true });
 
-  // 3. Blocare Right-Click (Meniu Contextual) cu excepția câmpurilor formularului
+  // 3. Blocare Right-Click (Meniu Contextual) complet silențioasă — fără pop-up
   document.addEventListener('contextmenu', (e) => {
     const targetTag = e.target.tagName ? e.target.tagName.toLowerCase() : '';
     if (targetTag === 'input' || targetTag === 'textarea') return;
 
     e.preventDefault();
-    afiseazaToast('🛡️ Conținutul și codul sursă sunt protejate prin drepturi de autor.');
     return false;
   });
 
-  // 4. Protecție suplimentară împotriva tragerii imaginilor
+  // 4. Protecție împotriva tragerii imaginilor
   document.addEventListener('dragstart', (e) => {
     if (e.target.tagName && e.target.tagName.toLowerCase() === 'img') {
       e.preventDefault();

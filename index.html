@@ -9,13 +9,13 @@
   <!-- Politici de Securitate Web & Protecție Anti-Doxxing -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; frame-src 'self' https://drive.google.com; media-src 'self' https://drive.google.com blob:; connect-src 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
   <!-- Optimizări PWA & Mobil -->
   <meta name="theme-color" content="#121213">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="site.webmanifest">
@@ -907,20 +907,20 @@
     </div>
   </div>
 
-  <!-- BANNER DE CONSIMȚĂMÂNT COOKIE-URI (GDPR & DIRECTIVA ePRIVACY) -->
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Gestionare Cookie-uri">
+  <!-- COOKIE CONSENT BANNER (SUBTLE & GDPR COMPLIANT) -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie Preferences">
     <div class="cookie-banner-content">
       <div class="cookie-banner-text">
         <div class="cookie-badge">
-          <i class="fa-solid fa-cookie-bite"></i> Confidențialitate & Cookie-uri (GDPR)
+          <i class="fa-solid fa-cookie-bite"></i> Cookie Preferences
         </div>
         <p>
-          Acest site utilizează module cookie strict necesare pentru funcționarea tehnică și servicii terțe integrate (Google Drive video embed) pentru redarea portofoliului. Respectăm confidențialitatea datelor tale conform Regulamentului (UE) 2016/679 (GDPR). Poți alege ce module permiți sau poți consulta <button type="button" class="cookie-policy-inline-btn open-legal-btn" data-legal-tab="cookie">Politica de Cookie-uri</button>.
+          We use essential cookies to ensure seamless playback and portfolio performance. <button type="button" class="cookie-policy-inline-btn open-legal-btn" data-legal-tab="cookie">Privacy & policy</button>
         </p>
       </div>
       <div class="cookie-banner-actions">
-        <button type="button" class="btn btn-sm btn-outline" id="essentialCookiesBtn">Doar esențiale</button>
-        <button type="button" class="btn btn-sm btn-primary" id="acceptAllCookiesBtn">Acceptă toate</button>
+        <button type="button" class="btn btn-sm btn-outline" id="essentialCookiesBtn">Decline</button>
+        <button type="button" class="btn btn-sm btn-primary" id="acceptAllCookiesBtn">Accept</button>
       </div>
     </div>
   </div>
