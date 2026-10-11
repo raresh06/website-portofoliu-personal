@@ -420,21 +420,41 @@ body.cursor-hover .cursor-circle {
   transition: transform var(--transition);
 }
 
-/* Navigație Mobilă */
+/* Navigație Mobilă & Backdrop */
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .mobile-nav {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 82%;
-  max-width: 340px;
+  width: min(85vw, 360px);
   height: 100vh;
+  height: 100dvh;
   background-color: #161618;
-  border-left: 1px solid var(--border-light);
-  z-index: 1000;
+  border-left: 1px solid rgba(197, 160, 89, 0.28);
+  box-shadow: -12px 0 45px rgba(0, 0, 0, 0.85);
+  z-index: 1001;
   display: flex;
   flex-direction: column;
-  padding: 2.5rem 1.75rem 2rem;
-  transition: right 0.3s ease;
+  padding: calc(1.5rem + env(safe-area-inset-top)) 1.75rem calc(1.75rem + env(safe-area-inset-bottom));
+  transition: right 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.active {
@@ -444,10 +464,32 @@ body.cursor-hover .cursor-circle {
 .mobile-header-brand {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.85rem;
   margin-bottom: 2rem;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-nav-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-medium);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.mobile-nav-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
 }
 
 .mobile-brand-group {
@@ -2479,30 +2521,30 @@ body.cursor-hover .cursor-circle {
 }
 
 /* ==========================================================================
-   MEDIA QUERIES PENTRU RESPONSIVITATE COMPLETĂ
-   Telefoane mici (320px-480px), Telefoane medii (481px-767px),
-   Tablete (768px-1024px) și Desktop
+   MEDIA QUERIES PENTRU RESPONSIVITATE COMPLETĂ & DESIGN MOBIL RAFINAT
+   Desktop (1025px+), Tablete (769px-1024px), Telefoane mari (481px-768px),
+   Telefoane standard (375px-480px) și Telefoane compacte (<=374px)
    ========================================================================== */
 
-/* TABLETE & SCREENS SUB 1024px */
+/* --- TABLETE & ECRANE MEDII (SUB 1024px) --- */
 @media (max-width: 1024px) {
   .hero-layout {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.75rem;
   }
 
   .about-symmetric-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.75rem;
   }
 
   .about-portrait-frame {
-    max-width: 480px;
+    max-width: 440px;
     margin: 0 auto;
   }
 
   .about-credentials-row {
-    max-width: 480px;
+    max-width: 440px;
     margin: 0 auto;
     width: 100%;
   }
@@ -2510,10 +2552,11 @@ body.cursor-hover .cursor-circle {
   .contact-card {
     grid-template-columns: 1fr;
     padding: 2.5rem;
+    gap: 2.5rem;
   }
 }
 
-/* TABLETE & ECRANE SUB 992px (Garantează că bara de navigare nu se suprapune) */
+/* --- TABLETE ÎN PORTRAIT & NAVBAR RESPONSIV (SUB 992px) --- */
 @media (max-width: 992px) {
   .nav-menu {
     display: none;
@@ -2528,10 +2571,17 @@ body.cursor-hover .cursor-circle {
   }
 }
 
-/* TELEFOANE & ECRANE SUB 768px */
+/* --- TELEFOANE & DISPOZITIVE MOBILE (SUB 768px) --- */
 @media (max-width: 768px) {
   :root {
-    --header-height: 68px;
+    --header-height: 64px;
+  }
+
+  /* 1. Header & Bara de Navigație Mobilă */
+  .site-header {
+    background-color: rgba(18, 18, 19, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .nav-menu,
@@ -2542,58 +2592,363 @@ body.cursor-hover .cursor-circle {
 
   .menu-toggle {
     display: flex;
+    width: 42px;
+    height: 42px;
+    padding: 9px;
   }
 
   .brand-logo-img {
-    height: 40px;
+    height: 38px;
+  }
+
+  .brand-user-name {
+    font-size: 0.84rem;
+  }
+
+  /* 2. Secțiunea Hero pe Telefoane */
+  .hero-section {
+    padding: clamp(2.75rem, 5.5vw, 3.75rem) 0 clamp(2.25rem, 4.5vw, 3rem);
+  }
+
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
   }
 
   .hero-heading {
-    font-size: clamp(2rem, 6.8vw, 2.75rem);
+    font-size: clamp(1.95rem, 6.4vw, 2.65rem);
+    line-height: 1.18;
+    margin-bottom: 0.85rem;
+  }
+
+  .quote-mark {
+    font-size: 1.05em;
+  }
+
+  .hero-quote-source {
+    margin-bottom: 1.35rem;
+  }
+
+  .quote-author {
+    font-size: 0.8rem;
+    padding-left: 0.75rem;
+  }
+
+  .hero-subtext {
+    font-size: 0.96rem;
+    line-height: 1.64;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    margin-bottom: 1.85rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 0.94rem;
+    justify-content: center;
   }
 
   .hero-stats {
-    flex-wrap: wrap;
-    gap: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--border-light);
+    text-align: left;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-number {
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    margin-top: 0.2rem;
   }
 
   .stat-divider {
     display: none;
   }
 
-  .hero-actions {
+  .hero-video-box {
+    width: 100%;
+  }
+
+  .video-preview-card {
+    outline-offset: 2px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  }
+
+  /* 3. Atmosferă Artistică Mobilă (Optimizată pentru Baterie & Lizibilitate) */
+  .hero-sketch-degas {
+    top: -2%;
+    left: -14%;
+    width: 250px;
+    opacity: 0.16;
+  }
+
+  .hero-painting-etoile {
+    top: auto;
+    bottom: -6%;
+    right: -14%;
+    width: 240px;
+    opacity: 0.15;
+  }
+
+  .hero-sketch-scapigliata {
+    display: none;
+  }
+
+  .hero-gallery-spotlight {
+    display: none; /* Inactiv pe touchscreens pentru economie GPU */
+  }
+
+  /* 4. Titluri & Cifre Romane de Secțiune */
+  .section {
+    padding: clamp(3rem, 5.5vw, 4.25rem) 0;
+  }
+
+  .roman-num-label {
+    font-size: clamp(1.65rem, 5vw, 2.15rem);
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.35rem;
+    border-bottom-width: 1.5px;
+  }
+
+  .section-heading {
+    font-size: clamp(1.75rem, 5.6vw, 2.35rem);
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-top: 0.45rem;
+  }
+
+  .section-header-simple {
+    margin-bottom: 1.75rem;
     flex-direction: column;
-    align-items: stretch;
-    width: 100%;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
-  .hero-actions .btn {
-    width: 100%;
-    text-align: center;
+  /* 5. Despre Mine (Portrait, Credențiale, Piloni) */
+  .about-portrait-frame {
+    max-width: 380px;
+    margin: 0 auto;
+    outline-offset: 2px;
   }
 
+  .portrait-badge-name {
+    font-size: 1.05rem;
+  }
+
+  .portrait-badge-role {
+    font-size: 0.78rem;
+  }
+
+  .about-credentials-row {
+    max-width: 380px;
+  }
+
+  .credential-card {
+    padding: 0.8rem 1.1rem;
+    min-height: 48px;
+  }
+
+  .cred-title {
+    font-size: 0.88rem;
+  }
+
+  .lead-text {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-bio-box p {
+    font-size: 0.92rem;
+    line-height: 1.66;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-card {
+    padding: 1rem 1.15rem;
+  }
+
+  /* 6. Galerie Video 9:16 pe Mobil */
   .category-filters {
     overflow-x: auto;
     flex-wrap: nowrap;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.65rem;
+    margin-bottom: 1.5rem;
+    gap: 0.55rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .category-filters::-webkit-scrollbar {
+    display: none;
   }
 
   .filter-chip {
+    padding: 0.45rem 1rem;
+    font-size: 0.82rem;
+    min-height: 38px;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
+  .videos-grid-vertical {
+    grid-template-columns: 1fr;
+    gap: 1.65rem;
+  }
+
+  .video-card-vertical {
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .vcard-thumb-wrap {
+    aspect-ratio: 9 / 13;
+  }
+
+  .vcard-play-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 1.1rem;
+  }
+
+  .vcard-info {
+    padding: 1.15rem;
+  }
+
+  .vcard-title {
+    font-size: 1.05rem;
+  }
+
+  .vcard-desc {
+    font-size: 0.85rem;
+    line-height: 1.52;
+    margin-bottom: 1rem;
+  }
+
+  /* 7. Grafică & Campanii Vizuale pe Mobil */
+  .graphics-grid {
+    grid-template-columns: 1fr;
+    gap: 1.65rem;
+  }
+
+  .graphic-card {
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .graphic-info {
+    padding: 1.15rem;
+  }
+
+  .graphic-info h4 {
+    font-size: 1.08rem;
+  }
+
+  .graphic-info p {
+    font-size: 0.85rem;
+    line-height: 1.52;
+  }
+
+  /* 8. Metodologie / Proces de Lucru pe Mobil */
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 0.95rem;
+  }
+
+  .process-card {
+    padding: 1.35rem;
+  }
+
+  .process-number {
+    margin-bottom: 0.75rem;
+  }
+
+  .process-card h4 {
+    font-size: 1.05rem;
+  }
+
+  .process-card p {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  /* 9. Contact Direct pe Mobil */
+  .contact-card {
+    padding: 1.85rem 1.35rem;
+    gap: 2rem;
+  }
+
+  .contact-intro {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    margin-bottom: 1.35rem;
+  }
+
+  .direct-contact-box {
+    gap: 0.75rem;
+    margin-bottom: 1.65rem;
+  }
+
+  .direct-email-row {
+    padding: 0.85rem 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .email-text {
+    font-size: 0.86rem;
+    word-break: break-all;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .social-btn {
+    padding: 0.75rem 0.85rem;
+    min-height: 46px;
+    font-size: 0.84rem;
+  }
+
+  /* 10. Footer Adaptiv pe Mobil */
   .footer-layout {
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1.75rem;
+    padding: 2.25rem 0 calc(2rem + env(safe-area-inset-bottom));
   }
 
   .footer-legal-links {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.4rem;
+    gap: 0.45rem;
   }
 
   .legal-dot {
@@ -2602,19 +2957,57 @@ body.cursor-hover .cursor-circle {
 
   .footer-right {
     align-items: flex-start;
+    gap: 0.45rem;
   }
 
-  .back-to-top-btn {
-    bottom: 1.25rem;
-    right: 1.25rem;
+  /* 11. Modal Video 9:16 & Lightbox pe Mobil */
+  .vertical-reel-dialog {
+    max-width: 100%;
+    max-height: 94vh;
+    max-height: 94dvh;
+    border-radius: var(--radius-md);
+  }
+
+  .frame-vertical {
+    max-height: 60vh;
+    max-height: 60dvh;
+  }
+
+  .modal-video-title {
+    font-size: 0.96rem;
+  }
+
+  .modal-close,
+  .lightbox-close {
     width: 42px;
     height: 42px;
   }
 
+  .modal-foot {
+    padding: 0.85rem 1.15rem;
+  }
+
+  .modal-description {
+    font-size: 0.82rem;
+  }
+
+  /* 12. Elemente Flotante (Buton Sus & Cookie Banner) */
+  .back-to-top-btn {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
+
   .cookie-banner {
-    bottom: 1rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
+    left: 0.75rem;
+    right: 0.75rem;
+    transform: none;
+    width: auto;
     padding: 1.15rem;
-    width: 95vw;
+    border-radius: var(--radius-md);
   }
 
   .cookie-banner-content {
@@ -2625,36 +3018,67 @@ body.cursor-hover .cursor-circle {
 
   .cookie-banner-actions {
     flex-direction: column;
+    gap: 0.55rem;
   }
 
   .cookie-banner-actions .btn {
     width: 100%;
+    min-height: 44px;
   }
 
   .legal-modal-dialog {
-    max-height: 92vh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    margin: 1rem;
+    width: calc(100% - 2rem);
   }
 
   .legal-modal-body {
-    padding: 1.35rem 1.25rem;
+    padding: 1.25rem 1.1rem;
   }
 }
 
-/* TELEFOANE FOARTE MICI (SUB 420px) */
-@media (max-width: 420px) {
+/* --- TELEFOANE COMPACTE (SUB 400px: iPhone SE, Galaxy A, etc.) --- */
+@media (max-width: 400px) {
   .brand-logo-img {
-    height: 35px;
+    height: 34px;
+  }
+
+  .brand-user-name {
+    display: none;
   }
 
   .hero-heading {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
 
-  .contact-card {
-    padding: 1.5rem;
+  .hero-stats {
+    gap: 0.45rem;
+  }
+
+  .stat-number {
+    font-size: 1.18rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
   }
 
   .about-portrait-frame {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 4.75;
+    border-radius: var(--radius-md);
+  }
+
+  .contact-card {
+    padding: 1.45rem 1rem;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions .btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
   }
 }

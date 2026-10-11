@@ -355,17 +355,44 @@ function initMeniuSiContact() {
   // Meniu mobil
   const toggle = document.getElementById('menuToggle');
   const navMobil = document.getElementById('mobileNav');
+  const backdrop = document.getElementById('mobileNavBackdrop');
+  const closeBtn = document.getElementById('mobileNavClose');
   const linkuriMobile = document.querySelectorAll('.mobile-link');
+
+  function inchideMeniu() {
+    if (navMobil) navMobil.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    if (toggle) toggle.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function deschideMeniu() {
+    if (navMobil) navMobil.classList.add('active');
+    if (backdrop) backdrop.classList.add('active');
+    if (toggle) toggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
   if (toggle && navMobil) {
     toggle.addEventListener('click', () => {
-      navMobil.classList.toggle('active');
+      if (navMobil.classList.contains('active')) {
+        inchideMeniu();
+      } else {
+        deschideMeniu();
+      }
     });
 
+    if (closeBtn) closeBtn.addEventListener('click', inchideMeniu);
+    if (backdrop) backdrop.addEventListener('click', inchideMeniu);
+
     linkuriMobile.forEach(link => {
-      link.addEventListener('click', () => {
-        navMobil.classList.remove('active');
-      });
+      link.addEventListener('click', inchideMeniu);
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMobil.classList.contains('active')) {
+        inchideMeniu();
+      }
     });
   }
 

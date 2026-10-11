@@ -100,12 +100,16 @@
   </header>
 
   <!-- MENIU MOBIL RESPONSIV -->
-  <div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigație mobilă">
     <div class="mobile-header-brand">
       <div class="mobile-brand-group">
         <img src="assets/logo.png" alt="GR Logo" class="mobile-logo-img">
         <span class="mobile-user-name">Gheorgheș Rareș • Portofoliu</span>
       </div>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Închide meniul">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
     <ul class="mobile-nav-links">
       <li><a href="#acasa" class="mobile-link">Acasă</a></li>
