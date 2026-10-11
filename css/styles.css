@@ -22,8 +22,19 @@
   --text-dark: #121213;
 
   --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Space Mono', monospace;
+
+  /* Cromatică de Artă & Atelier Curatorial */
+  --art-gold: #c5a059;
+  --art-gold-light: #e6c875;
+  --art-gold-muted: rgba(197, 160, 89, 0.38);
+  --art-gold-glow: rgba(197, 160, 89, 0.15);
+  --art-canvas: #0e0e10;
+  --art-canvas-warm: #161518;
+  --art-umber: #28211b;
+  --art-ivory: #faf8f2;
 
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -59,6 +70,19 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   position: relative;
+}
+
+/* Textură Globală Subtilă de Pânză de In / Fine-Art Linen Canvas */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('../assets/art/canvas-weave.svg');
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
 }
 
 ::selection {
@@ -217,7 +241,7 @@ body.cursor-hover .cursor-circle {
   gap: 0.65rem;
 }
 
-/* --- ETICHETE ȘI DETALII --- */
+/* --- ETICHETE ȘI DETALII DE CAPITOL EDITORIAL --- */
 .mono-label {
   display: inline-block;
   font-family: var(--font-mono);
@@ -226,6 +250,26 @@ body.cursor-hover .cursor-circle {
   color: var(--text-muted);
   margin-bottom: 0.75rem;
   text-transform: uppercase;
+}
+
+.art-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--art-gold);
+  border-bottom: 1px solid var(--art-gold-muted);
+  padding-bottom: 0.35rem;
+  margin-bottom: 1.15rem;
+  letter-spacing: 0.08em;
+}
+
+.roman-num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--art-gold-light);
+  font-style: normal;
+  line-height: 1;
 }
 
 /* --- LINIE PROGRES SCROLL (QOL) --- */
@@ -460,17 +504,17 @@ body.cursor-hover .cursor-circle {
   color: #ffffff;
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION: ATELIER DE ARTĂ & COMPOZIȚIE CLASICĂ --- */
 .hero-section {
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 6vw, 5.5rem) 0 clamp(3rem, 5vw, 4.5rem);
-  border-bottom: 1px solid var(--border-light);
-  background: radial-gradient(circle at 50% 20%, #151517 0%, #111112 100%);
+  padding: clamp(3.8rem, 6.2vw, 6rem) 0 clamp(3.2rem, 5.2vw, 4.8rem);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+  background: radial-gradient(circle at 50% 15%, var(--art-canvas-warm) 0%, var(--art-canvas) 100%);
 }
 
-/* Efecte Vizuale Dinamice de Fundal (Hero FX) */
-.hero-bg-fx {
+/* Container Backdrop Artistic */
+.hero-art-backdrop {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -478,168 +522,276 @@ body.cursor-hover .cursor-circle {
   overflow: hidden;
 }
 
-.hero-particles-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Orbi Ambientali de Lumină Fluidă (Aurora Effect) */
-.hero-aurora-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(95px);
-  -webkit-filter: blur(95px);
-  will-change: transform, opacity;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.hero-orb-1 {
-  width: clamp(350px, 45vw, 680px);
-  height: clamp(350px, 45vw, 680px);
-  top: -12%;
-  left: -8%;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.32) 0%, rgba(99, 102, 241, 0.18) 45%, transparent 70%);
-  animation: floatOrb1 16s ease-in-out infinite alternate;
-}
-
-.hero-orb-2 {
-  width: clamp(320px, 40vw, 600px);
-  height: clamp(320px, 40vw, 600px);
-  top: 10%;
-  right: -6%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(217, 119, 6, 0.12) 50%, transparent 70%);
-  animation: floatOrb2 20s ease-in-out infinite alternate;
-}
-
-.hero-orb-3 {
-  width: clamp(300px, 35vw, 540px);
-  height: clamp(300px, 35vw, 540px);
-  bottom: -20%;
-  left: 30%;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.22) 0%, rgba(13, 148, 136, 0.10) 50%, transparent 70%);
-  animation: floatOrb3 18s ease-in-out infinite alternate;
-}
-
-@keyframes floatOrb1 {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.45;
-  }
-  50% {
-    transform: translate(55px, 40px) scale(1.12);
-    opacity: 0.65;
-  }
-  100% {
-    transform: translate(-30px, 60px) scale(0.95);
-    opacity: 0.4;
-  }
-}
-
-@keyframes floatOrb2 {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translate(-45px, -35px) scale(1.15);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(35px, 45px) scale(0.92);
-    opacity: 0.35;
-  }
-}
-
-@keyframes floatOrb3 {
-  0% {
-    transform: translate(0, 0) scale(0.95);
-    opacity: 0.35;
-  }
-  50% {
-    transform: translate(-35px, -25px) scale(1.1);
-    opacity: 0.55;
-  }
-  100% {
-    transform: translate(45px, -40px) scale(1);
-    opacity: 0.4;
-  }
-}
-
-/* Grilă Minimalistă de Puncte Tehnice (Subtle Tech Texture) */
-.hero-grid-mesh {
+/* 1. Textură Pânză de In / Ulei (Museum Linen Canvas Grain) */
+.hero-canvas-weave {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 25%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, black 25%, transparent 80%);
-  opacity: 0.7;
+  background-image: url('../assets/art/canvas-weave.svg');
+  background-repeat: repeat;
+  opacity: 0.65;
+  mix-blend-mode: overlay;
+  z-index: 4;
   pointer-events: none;
-  z-index: 1;
 }
 
-/* Cursor Interactive Spotlight */
-.hero-mouse-spotlight {
+/* 2. Schiță Neterminată: Edgar Degas - Studiu de Dansatoare în Cărbune & Cretă (1874) */
+.hero-art-layer {
   position: absolute;
-  width: 520px;
-  height: 520px;
-  margin-top: -260px;
-  margin-left: -260px;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.hero-sketch-degas {
+  top: -8%;
+  left: -5%;
+  width: clamp(440px, 48vw, 760px);
+  height: auto;
+  opacity: 0.32;
+  filter: contrast(1.15) brightness(0.88) sepia(0.22);
+  mix-blend-mode: lighten;
+  z-index: 2;
+  mask-image: radial-gradient(ellipse 70% 75% at 45% 45%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 45% 45%, black 20%, transparent 80%);
+  animation: subtleArtFloat 24s ease-in-out infinite alternate;
+}
+
+.art-img-sketch {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: rotate(-3deg);
+}
+
+/* 3. Capodoperă Impresionistă: Edgar Degas - L'Étoile (Balerină pe scenă) */
+.hero-painting-etoile {
+  top: 4%;
+  right: -6%;
+  width: clamp(460px, 52vw, 840px);
+  height: auto;
+  opacity: 0.28;
+  filter: saturate(1.12) contrast(1.12) brightness(0.85);
+  mix-blend-mode: screen;
+  z-index: 2;
+  mask-image: radial-gradient(ellipse 75% 70% at 60% 45%, black 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 60% 45%, black 25%, transparent 80%);
+  animation: subtleArtFloatReverse 28s ease-in-out infinite alternate;
+}
+
+.art-img-oil {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: rotate(2deg) scale(1.02);
+}
+
+/* 4. Schiță Renascentistă Neterminată: Leonardo da Vinci - La Scapigliata */
+.hero-sketch-scapigliata {
+  bottom: -22%;
+  left: 26%;
+  width: clamp(340px, 36vw, 560px);
+  height: auto;
+  opacity: 0.20;
+  filter: contrast(1.22) sepia(0.28) brightness(0.82);
+  mix-blend-mode: color-dodge;
+  z-index: 1;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 20%, transparent 75%);
+  animation: subtleArtBreathe 20s ease-in-out infinite alternate;
+}
+
+.art-img-scapigliata {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 5. Chiaroscuro Vignette & Atmosferă de Atelier */
+.hero-chiaroscuro-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 85% 75% at 50% 45%, transparent 35%, rgba(14, 14, 16, 0.72) 75%, #0e0e10 100%),
+              linear-gradient(180deg, rgba(14, 14, 16, 0.5) 0%, transparent 20%, transparent 80%, #0e0e10 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 6. Spotlight Cald de Galerie / Felinar de Atelier la Cursor */
+.hero-gallery-spotlight {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  margin-top: -300px;
+  margin-left: -300px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(139, 92, 246, 0.035) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(235, 205, 145, 0.09) 0%, rgba(197, 160, 89, 0.038) 42%, transparent 72%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
+  transition: opacity 0.5s ease;
+  z-index: 3;
   will-change: transform;
+  mix-blend-mode: screen;
+}
+
+/* 7. Placă Muzeală de Autenticitate Curation */
+.hero-museum-plaque {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.85rem;
+  background-color: rgba(18, 18, 20, 0.82);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: var(--radius-full);
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.plaque-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--art-gold);
+  box-shadow: 0 0 8px var(--art-gold);
+  flex-shrink: 0;
+}
+
+.plaque-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #c9c7bf;
+}
+
+/* Animații Lente & Organice de Atelier */
+@keyframes subtleArtFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate(25px, 15px) scale(1.03);
+    opacity: 0.36;
+  }
+  100% {
+    transform: translate(-15px, 25px) scale(0.98);
+    opacity: 0.26;
+  }
+}
+
+@keyframes subtleArtFloatReverse {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate(-20px, -15px) scale(1.04);
+    opacity: 0.32;
+  }
+  100% {
+    transform: translate(15px, 20px) scale(0.99);
+    opacity: 0.22;
+  }
+}
+
+@keyframes subtleArtBreathe {
+  0% {
+    transform: scale(0.98);
+    opacity: 0.16;
+  }
+  100% {
+    transform: scale(1.03);
+    opacity: 0.24;
+  }
 }
 
 .hero-layout {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   display: grid;
   grid-template-columns: 1.25fr 0.85fr;
   gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
 }
 
+/* Badge Curation & Direcție Artistică */
+.hero-curation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 1rem;
+  background: rgba(197, 160, 89, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--art-gold-light);
+  margin-bottom: 1.35rem;
+  text-transform: uppercase;
+}
 
+.hero-curation-badge i {
+  color: var(--art-gold);
+  font-size: 0.85rem;
+}
 
 .hero-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2.3rem, 4.4vw, 3.65rem);
-  font-weight: 400;
-  line-height: 1.16;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.8vw, 4.1rem);
+  font-weight: 500;
+  line-height: 1.15;
   letter-spacing: -0.015em;
   color: #ffffff;
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
 }
 
 .hero-quote-heading {
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+.quote-mark {
+  color: var(--art-gold);
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 1.15em;
+  line-height: 0;
+  position: relative;
+  top: 0.08em;
+  margin: 0 0.08em;
 }
 
 .hero-quote-source {
-  margin-bottom: 1.65rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.85rem;
 }
 
 .quote-author {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b5b5b0;
+  color: var(--art-gold-light);
   display: inline-flex;
   align-items: center;
-  padding-left: 0.75rem;
-  border-left: 2px solid var(--border-medium);
+  padding-left: 0.85rem;
+  border-left: 2.5px solid var(--art-gold);
+  font-weight: 700;
+}
+
+.quote-context {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  font-style: italic;
+  font-family: var(--font-display);
 }
 
 .hero-subtext {
@@ -703,15 +855,21 @@ body.cursor-hover .cursor-circle {
   width: 100%;
   aspect-ratio: 4 / 3;
   background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  outline: 1px solid rgba(255, 255, 255, 0.05);
+  outline-offset: 4px;
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
-  transition: border-color var(--transition);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 24px rgba(197, 160, 89, 0.06);
+  transition: border-color var(--transition), box-shadow var(--transition), outline-color var(--transition), transform var(--transition);
 }
 
 .video-preview-card:hover {
-  border-color: #ffffff;
+  border-color: var(--art-gold);
+  outline-color: rgba(197, 160, 89, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.75), 0 0 32px rgba(197, 160, 89, 0.18);
 }
 
 .preview-img-cover {
@@ -740,17 +898,20 @@ body.cursor-hover .cursor-circle {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--art-ivory);
   color: #121213;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  transition: transform var(--transition);
+  font-size: 1.15rem;
+  border: 2px solid var(--art-gold);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(197, 160, 89, 0.35);
+  transition: transform var(--transition), background-color var(--transition);
 }
 
 .video-preview-card:hover .play-action-circle {
   transform: scale(1.1);
+  background-color: var(--art-gold-light);
 }
 
 .preview-overlay-info {
@@ -794,11 +955,12 @@ body.cursor-hover .cursor-circle {
 }
 
 .section-heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 400;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 3.4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.18;
   color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .section-desc {
@@ -837,10 +999,19 @@ body.cursor-hover .cursor-circle {
   width: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border-medium);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  outline: 1px solid rgba(255, 255, 255, 0.05);
+  outline-offset: 4px;
   background-color: var(--bg-card);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 24px rgba(197, 160, 89, 0.06);
   aspect-ratio: 4 / 4.75;
+  transition: border-color var(--transition), box-shadow var(--transition), outline-color var(--transition);
+}
+
+.about-portrait-frame:hover {
+  border-color: rgba(197, 160, 89, 0.65);
+  outline-color: rgba(197, 160, 89, 0.25);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.75), 0 0 32px rgba(197, 160, 89, 0.16);
 }
 
 .about-portrait-symmetric-img {
@@ -903,9 +1074,10 @@ body.cursor-hover .cursor-circle {
 }
 
 .credential-card:hover {
-  border-color: #ffffff;
+  border-color: rgba(197, 160, 89, 0.5);
   background-color: var(--bg-subtle);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
 .credential-icon {
@@ -981,12 +1153,13 @@ body.cursor-hover .cursor-circle {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  transition: border-color var(--transition), background-color var(--transition);
+  transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
 }
 
 .pillar-card:hover {
-  border-color: var(--border-medium);
+  border-color: rgba(197, 160, 89, 0.45);
   background-color: var(--bg-card-hover);
+  transform: translateX(4px);
 }
 
 .pillar-header {
@@ -999,8 +1172,9 @@ body.cursor-hover .cursor-circle {
 .pillar-num {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: #d1d1cd;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--art-gold-light);
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.25);
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-xs);
 }
@@ -1067,17 +1241,19 @@ body.cursor-hover .cursor-circle {
 
 .video-card-vertical {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(197, 160, 89, 0.2);
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color var(--transition), transform var(--transition);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .video-card-vertical:hover {
-  border-color: var(--border-hover);
+  border-color: rgba(197, 160, 89, 0.6);
   transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65), 0 0 20px rgba(197, 160, 89, 0.12);
 }
 
 .vcard-thumb-wrap {
@@ -1120,17 +1296,20 @@ body.cursor-hover .cursor-circle {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--art-ivory);
   color: #121213;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.05rem;
-  transition: transform var(--transition);
+  border: 1.5px solid var(--art-gold);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: transform var(--transition), background-color var(--transition);
 }
 
 .video-card-vertical:hover .vcard-play-btn {
   transform: scale(1.1);
+  background-color: var(--art-gold-light);
 }
 
 .vcard-badge-top {
@@ -1222,16 +1401,19 @@ body.cursor-hover .cursor-circle {
 
 .graphic-card {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-light);
+  border: 1px solid rgba(197, 160, 89, 0.2);
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color var(--transition);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .graphic-card:hover {
-  border-color: var(--border-hover);
+  border-color: rgba(197, 160, 89, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65), 0 0 20px rgba(197, 160, 89, 0.12);
 }
 
 .graphic-img-wrap {

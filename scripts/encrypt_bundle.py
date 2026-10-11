@@ -130,3 +130,4 @@ if __name__ == '__main__':
         f.write(bundle)
 
     print(f"Packaged {src_file} -> {dest_file} ({len(src)} bytes source -> {len(bundle)} bytes protected payload)")
+

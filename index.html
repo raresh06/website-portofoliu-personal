@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://drive.google.com">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -131,25 +131,54 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-section" id="acasa">
-      <!-- Efecte Vizuale Dinamice Fundal (Aurora Glow, Particule & Mesh) -->
-      <div class="hero-bg-fx" aria-hidden="true">
-        <canvas class="hero-particles-canvas" id="heroParticlesCanvas"></canvas>
-        <div class="hero-aurora-orb hero-orb-1"></div>
-        <div class="hero-aurora-orb hero-orb-2"></div>
-        <div class="hero-aurora-orb hero-orb-3"></div>
-        <div class="hero-grid-mesh"></div>
-        <div class="hero-mouse-spotlight" id="heroMouseSpotlight"></div>
+      <!-- Fundal Artistic Atelier: Picturi și Schițe Clasice în Dialog cu Lumina -->
+      <div class="hero-art-backdrop" aria-hidden="true">
+        <!-- Textură pânză de pictură (Canvas Linen Weave) -->
+        <div class="hero-canvas-weave"></div>
+
+        <!-- Schiță Neterminată: Edgar Degas - Studiu de Dansatoare în Cărbune (1874) -->
+        <div class="hero-art-layer hero-sketch-degas" title="Edgar Degas — Studiu în cărbune și pastel">
+          <img src="assets/art/degas-dancer-study.jpg" alt="Edgar Degas Schiță" class="art-img-sketch" loading="eager">
+        </div>
+
+        <!-- Pictură Impresionistă: Edgar Degas - L'Étoile (Balerină pe scenă) -->
+        <div class="hero-art-layer hero-painting-etoile" title="Edgar Degas — L'Étoile">
+          <img src="assets/art/degas-letoile.jpg" alt="Edgar Degas L'Étoile" class="art-img-oil" loading="eager">
+        </div>
+
+        <!-- Schiță Renascentistă Neterminată: Leonardo da Vinci - La Scapigliata -->
+        <div class="hero-art-layer hero-sketch-scapigliata" title="Leonardo da Vinci — La Scapigliata">
+          <img src="assets/art/leonardo-scapigliata.jpg" alt="Leonardo da Vinci La Scapigliata" class="art-img-scapigliata" loading="lazy">
+        </div>
+
+        <!-- Umbre Chiaroscuro & Filtru cald de atelier de artă -->
+        <div class="hero-chiaroscuro-vignette"></div>
+
+        <!-- Spotlight Curatorial Cald la Mișcarea Mouse-ului -->
+        <div class="hero-gallery-spotlight" id="heroGallerySpotlight"></div>
+
+        <!-- Placă Muzeală de Cunoaștere & Autenticitate -->
+        <div class="hero-museum-plaque">
+          <span class="plaque-dot"></span>
+          <span class="plaque-text">Atelier Curatorial • Edgar Degas & Leonardo da Vinci • Patrimoniu Public</span>
+        </div>
       </div>
 
       <div class="container hero-layout">
         <div class="hero-intro">
           
+          <div class="hero-curation-badge">
+            <i class="fa-solid fa-paintbrush"></i>
+            <span>Viziune & Direcție Artistică • Marketing Vizual</span>
+          </div>
+
           <h1 class="hero-heading hero-quote-heading">
-            „Arta nu este ceea ce vezi, ci ceea ce îi faci pe ceilalți să vadă.”
+            <span class="quote-mark">„</span>Arta nu este ceea ce vezi, ci ceea ce îi faci pe ceilalți să vadă.<span class="quote-mark">”</span>
           </h1>
           
           <div class="hero-quote-source">
             <span class="quote-author">— Edgar Degas</span>
+            <span class="quote-context">• Maestru al Mișcării & Impresionismului</span>
           </div>
           
           <p class="hero-subtext">
@@ -212,7 +241,7 @@
       <div class="container">
         
         <div class="section-intro-centered">
-          <span class="mono-label">01 / Despre mine</span>
+          <span class="mono-label art-label"><span class="roman-num">I</span> • Retrospectivă & Viziune Artistică</span>
           <h2 class="section-heading">Cine sunt și cum privesc marketingul & arta</h2>
           <p class="section-desc">
             O sinergie între rigoare academică la FEAA Marketing, ritm vizual și pasiune pentru conținut digital captivant.
@@ -313,7 +342,7 @@
       <div class="container">
         <div class="section-header-simple">
           <div>
-            <span class="mono-label">02 / Conținut Video</span>
+            <span class="mono-label art-label"><span class="roman-num">II</span> • Galerie Video 9:16 & Ritm Cinematografic</span>
             <h2 class="section-heading">Videoclipuri TikTok & Reels (9:16)</h2>
           </div>
           <p class="section-desc">
@@ -538,7 +567,7 @@
       <div class="container">
         <div class="section-header-simple">
           <div>
-            <span class="mono-label">03 / Grafică & Social Media</span>
+            <span class="mono-label art-label"><span class="roman-num">III</span> • Compoziție Grafică & Identitate Vizuală</span>
             <h2 class="section-heading">Campanii Vizuale, Postere & Carusele</h2>
           </div>
           <p class="section-desc">
@@ -682,7 +711,7 @@
     <section class="section section-bordered" id="proces">
       <div class="container">
         <div class="section-title-col" style="margin-bottom: 3.5rem;">
-          <span class="mono-label">04 / Metodologie</span>
+          <span class="mono-label art-label"><span class="roman-num">IV</span> • Metodologie de Atelier & Proces de Creație</span>
           <h2 class="section-heading">Cum transform o idee în conținut final</h2>
           <p class="section-desc">Un proces simplu și previzibil, de la primul brief până la livrarea fișierelor finale.</p>
         </div>
@@ -722,7 +751,7 @@
       <div class="container">
         <div class="contact-card">
           <div class="contact-left">
-            <span class="mono-label">05 / Contact direct</span>
+            <span class="mono-label art-label"><span class="roman-num">V</span> • Atelier Deschis & Dialog Direct</span>
             <h2 class="section-heading">Hai să colaborăm</h2>
             <p class="contact-intro">
               Dacă ai o campanie nouă, ai nevoie de conținut video pentru rețelele sociale sau vrei să colaborăm pe termen lung, scrie-mi pe email sau dă-mi un mesaj pe WhatsApp.

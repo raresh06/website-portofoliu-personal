@@ -1081,20 +1081,22 @@ function initCommandPalette() {
 }
 
 /* ==========================================================================
-   13. EFECTE VIZUALE DINAMICE HERO (AURORA PARTICULE & SPOTLIGHT)
+   13. EFECTE ATELIER ARTISTIC: LANTERNĂ CURATORIALĂ & PARALLAX SUBTIL
    ========================================================================== */
-function initHeroBackgroundEffects() {
+function initHeroArtAtelier() {
   const heroSection = document.querySelector('.hero-section');
-  const canvas = document.getElementById('heroParticlesCanvas');
-  const spotlight = document.getElementById('heroMouseSpotlight');
+  const spotlight = document.getElementById('heroGallerySpotlight');
+  const sketchLayer = document.querySelector('.hero-sketch-degas');
+  const oilLayer = document.querySelector('.hero-painting-etoile');
+  const scapigliataLayer = document.querySelector('.hero-sketch-scapigliata');
   if (!heroSection) return;
 
-  // Spotlight interactiv la mișcarea cursorului
+  // 1. Felinar cald de atelier la mișcarea cursorului
   if (spotlight) {
-    let targetX = -500;
-    let targetY = -500;
-    let currentX = -500;
-    let currentY = -500;
+    let targetX = -600;
+    let targetY = -600;
+    let currentX = -600;
+    let currentY = -600;
     let isHovering = false;
 
     heroSection.addEventListener('mouseenter', () => {
@@ -1105,12 +1107,29 @@ function initHeroBackgroundEffects() {
     heroSection.addEventListener('mouseleave', () => {
       isHovering = false;
       spotlight.style.opacity = '0';
+      if (sketchLayer) sketchLayer.style.transform = '';
+      if (oilLayer) oilLayer.style.transform = '';
+      if (scapigliataLayer) scapigliataLayer.style.transform = '';
     });
 
     heroSection.addEventListener('mousemove', (e) => {
       const rect = heroSection.getBoundingClientRect();
       targetX = e.clientX - rect.left;
       targetY = e.clientY - rect.top;
+
+      // Parallax subtil de adâncime de atelier (3-6px max)
+      const normX = (targetX / rect.width) - 0.5;
+      const normY = (targetY / rect.height) - 0.5;
+
+      if (sketchLayer) {
+        sketchLayer.style.transform = `translate(${normX * 14}px, ${normY * 12}px)`;
+      }
+      if (oilLayer) {
+        oilLayer.style.transform = `translate(${-normX * 16}px, ${-normY * 14}px)`;
+      }
+      if (scapigliataLayer) {
+        scapigliataLayer.style.transform = `translate(${normX * 8}px, ${normY * 8}px)`;
+      }
     }, { passive: true });
 
     function tickSpotlight() {
@@ -1122,95 +1141,6 @@ function initHeroBackgroundEffects() {
       requestAnimationFrame(tickSpotlight);
     }
     requestAnimationFrame(tickSpotlight);
-  }
-
-  // Particule dinamice de lumină pe Canvas
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = 0;
-    let height = 0;
-    let animId = null;
-    let isVisible = true;
-
-    function resize() {
-      const rect = heroSection.getBoundingClientRect();
-      width = canvas.width = rect.width;
-      height = canvas.height = rect.height;
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    const count = window.innerWidth < 768 ? 20 : 38;
-    const particles = [];
-    const colorBases = [
-      '139, 92, 246',  // Violet
-      '245, 158, 11',  // Chihlimbar / Aur cald
-      '20, 184, 166',  // Turcoaz / Cyan
-      '255, 255, 255'  // Spark alb
-    ];
-
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * (width || 800),
-        y: Math.random() * (height || 600),
-        r: Math.random() * 1.7 + 0.6,
-        color: colorBases[Math.floor(Math.random() * colorBases.length)],
-        baseAlpha: Math.random() * 0.45 + 0.25,
-        vx: (Math.random() - 0.5) * 0.38,
-        vy: (Math.random() - 0.5) * 0.38 - 0.1,
-        phase: Math.random() * Math.PI * 2,
-        phaseSpeed: Math.random() * 0.02 + 0.008
-      });
-    }
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          isVisible = entry.isIntersecting;
-          if (isVisible && !animId) {
-            loop();
-          }
-        });
-      }, { threshold: 0.05 });
-      observer.observe(heroSection);
-    }
-
-    function loop() {
-      if (!isVisible) {
-        animId = null;
-        return;
-      }
-
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.phase += p.phaseSpeed;
-
-        if (p.x < -10) p.x = width + 10;
-        if (p.x > width + 10) p.x = -10;
-        if (p.y < -10) p.y = height + 10;
-        if (p.y > height + 10) p.y = -10;
-
-        const alpha = Math.max(0.08, p.baseAlpha * (0.6 + 0.4 * Math.sin(p.phase)));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color}, ${alpha})`;
-        ctx.shadowBlur = 6;
-        ctx.shadowColor = `rgba(${p.color}, 0.5)`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      animId = requestAnimationFrame(loop);
-    }
-
-    loop();
   }
 }
 
@@ -1284,7 +1214,7 @@ function initSecurityProtections() {
 document.addEventListener('DOMContentLoaded', () => {
   initSecurityProtections();
   initCursor();
-  initHeroBackgroundEffects();
+  initHeroArtAtelier();
   initFiltre();
   initMeniuSiContact();
   initScrollQOL();

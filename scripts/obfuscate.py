@@ -135,3 +135,4 @@ if __name__ == '__main__':
         f.write(obfuscated)
 
     print(f"Obfuscated {src_path} -> {dest_path} ({len(src)} bytes -> {len(obfuscated)} bytes)")
+
