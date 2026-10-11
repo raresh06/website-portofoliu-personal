@@ -1,120 +1,99 @@
 #!/usr/bin/env python3
 """
-GR Cryptographic Bundle Packer & Obfuscator
-Encrypts js/main.dev.js into an encrypted, tamper-protected payload for js/main.js
+GR High-Security Production Bundle Packer & Encrypter
+Transforms source into an unreadable, tamper-resistant, heavily scrambled payload.
+Zero visible source code, zero console leaks, silent protection.
 """
 
+import re
 import sys
 import os
 
-def encrypt_code(source_code, key=0x7B):
-    # XOR each character with a rotating key offset
-    encrypted_bytes = []
-    source_bytes = source_code.encode('utf-8')
-    for i, b in enumerate(source_bytes):
-        k = (key + (i % 37)) & 0xFF
-        encrypted_bytes.append(b ^ k)
+def strip_comments_and_logs(code):
+    # Strip comments while preserving strings
+    def replacer(match):
+        s = match.group(0)
+        if s.startswith('/'):
+            return ' '
+        return s
 
-    # Convert to hex string
+    pattern = re.compile(
+        r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"|`(?:\\.|[^\\`])*`',
+        re.DOTALL | re.MULTILINE
+    )
+    code = re.sub(pattern, replacer, code)
+
+    # Remove console.log / console.info / console.warn calls
+    code = re.sub(r'console\.(log|info|warn|debug)\([^;]*\);?', '', code)
+
+    # Minify lines safely
+    lines = []
+    for line in code.splitlines():
+        line = line.strip()
+        if line:
+            lines.append(line)
+    
+    compact = "\n".join(lines)
+    return compact
+
+def encrypt_payload(source_code, key=0xA7):
+    # Multi-round rotating XOR stream with non-linear offset
+    source_bytes = source_code.encode('utf-8')
+    encrypted_bytes = []
+    for i, b in enumerate(source_bytes):
+        mask = (key + (i * 7) ^ 0x5D) & 0xFF
+        encrypted_bytes.append(b ^ mask)
+    
     hex_stream = "".join(f"{b:02x}" for b in encrypted_bytes)
     return hex_stream, key
 
 def build_protected_bundle(source_code):
-    hex_payload, key = encrypt_code(source_code)
+    cleaned_code = strip_comments_and_logs(source_code)
+    hex_stream, key = encrypt_payload(cleaned_code)
 
-    loader = f"""/* =========================================================================
- * 🛡️ SISTEM DE PROTECȚIE & CRIPTARE ACTIV — PORTOFOLIU GHEORGHEȘ RAREȘ (GR)
- * LEGEA NR. 8/1996 PRIVIND DREPTUL DE AUTOR ȘI DREPTURILE CONEXE
- * ACEST SCRIPT ESTE CRIPTAT & PROTEJAT ÎMPOTRIVA INSPECȚIEI NEAUTORIZATE
- * ========================================================================= */
-(function(_0xRoot) {{
-  'use strict';
+    # 100% minified, zero-comment loader with mangled identifiers
+    loader = (
+        "!function(_0xW,_0xD){'use strict';"
+        "try{var _0xN=function(){};_0xW.console&&(console.log=_0xN,console.warn=_0xN,console.info=_0xN,console.clear&&console.clear());}catch(_0x0){}"
+        "if(typeof window!=='undefined'){"
+        "_0xW.addEventListener('keydown',function(_0xE){"
+        "if(_0xE.keyCode===123||_0xE.key==='F12')return _0xE.preventDefault(),!1;"
+        "var _0xM=navigator.platform.toUpperCase().indexOf('MAC')>=0,"
+        "_0xK=_0xM?_0xE.metaKey&&_0xE.altKey&&'iIjJcCuU'.indexOf(_0xE.key)>=0:(_0xE.ctrlKey&&_0xE.shiftKey&&'iIjJcCuU'.indexOf(_0xE.key)>=0)||((_0xE.ctrlKey||_0xE.metaKey)&&'uUsS'.indexOf(_0xE.key)>=0);"
+        "if(_0xK)return _0xE.preventDefault(),!1;"
+        "},!0);"
+        "_0xD.addEventListener('contextmenu',function(_0xE){"
+        "var _0xT=(_0xE.target&&_0xE.target.tagName)?_0xE.target.tagName.toLowerCase():'';"
+        "if(_0xT==='input'||_0xT==='textarea')return;"
+        "_0xE.preventDefault();return!1;"
+        "},!0);"
+        "_0xD.addEventListener('dragstart',function(_0xE){"
+        "if(_0xE.target&&_0xE.target.tagName&&_0xE.target.tagName.toLowerCase()==='img')_0xE.preventDefault();"
+        "});"
+        "}"
+        f"var _0xK={key},_0xS='{hex_stream}';"
+        "var _0xDEC=function(_0xH,_0xM){"
+        "var _0xB=[];"
+        "for(var _0xI=0;_0xI<_0xH.length;_0xI+=2){"
+        "var _0xBY=parseInt(_0xH.substr(_0xI,2),16);"
+        "var _0xID=_0xI/2;"
+        "var _0xMK=(_0xM+(_0xID*7)^0x5D)&0xFF;"
+        "_0xB.push(_0xBY^_0xMK);"
+        "}"
+        "var _0xU='';"
+        "for(var _0xJ=0;_0xJ<_0xB.length;_0xJ++)_0xU+='%'+('0'+_0xB[_0xJ].toString(16)).slice(-2);"
+        "try{return decodeURIComponent(_0xU);}"
+        "catch(_0xER){"
+        "var _0xR='';"
+        "for(var _0xP=0;_0xP<_0xB.length;_0xP++)_0xR+=String.fromCharCode(_0xB[_0xP]);"
+        "return _0xR;"
+        "}"
+        "};"
+        "var _0xPAY=_0xDEC(_0xS,_0xK);"
+        "(0,eval)(_0xPAY);"
+        "}(typeof window!=='undefined'?window:this,typeof document!=='undefined'?document:{});"
+    )
 
-  // 1. Alertă Securitate în DevTools Console
-  try {{
-    var _0xStyle1 = 'color: #f59e0b; font-size: 16px; font-weight: bold; background: #161618; padding: 8px 16px; border-radius: 4px; border: 1px solid #d97706;';
-    var _0xStyle2 = 'color: #a1a1aa; font-size: 12px; line-height: 1.6; margin-top: 4px;';
-    console.log('%c🔒 ZONĂ SECURIZATĂ — PORTOFOLIU GHEORGHEȘ RAREȘ (GR)', _0xStyle1);
-    console.log('%cConținutul multimedia, montajele video și codul sursă sunt protejate prin drepturi de autor conform Legii nr. 8/1996.\\nInspectarea și extragerea neautorizată de active sunt restricționate.', _0xStyle2);
-  }} catch (_0xE) {{}}
-
-  // 2. Blocare comenzi de tastatură (F12, Inspect Element, View Source, Save)
-  if (typeof window !== 'undefined') {{
-    window.addEventListener('keydown', function(_0xE) {{
-      if (_0xE.key === 'F12' || _0xE.keyCode === 123) {{
-        _0xE.preventDefault();
-        if (window.afiseazaToast) window.afiseazaToast('🛡️ Accesul la consola de dezvoltare este restricționat.');
-        return false;
-      }}
-      var _0xMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-      var _0xDev = _0xMac
-        ? (_0xE.metaKey && _0xE.altKey && (_0xE.key === 'i' || _0xE.key === 'I' || _0xE.key === 'j' || _0xE.key === 'J' || _0xE.key === 'c' || _0xE.key === 'C'))
-        : (_0xE.ctrlKey && _0xE.shiftKey && (_0xE.key === 'i' || _0xE.key === 'I' || _0xE.key === 'j' || _0xE.key === 'J' || _0xE.key === 'c' || _0xE.key === 'C'));
-      if (_0xDev) {{
-        _0xE.preventDefault();
-        if (window.afiseazaToast) window.afiseazaToast('🛡️ Inspectarea elementelor este dezactivată pentru protecția codului.');
-        return false;
-      }}
-      if ((_0xE.ctrlKey && (_0xE.key === 'u' || _0xE.key === 'U')) || (_0xMac && _0xE.metaKey && _0xE.altKey && (_0xE.key === 'u' || _0xE.key === 'U'))) {{
-        _0xE.preventDefault();
-        if (window.afiseazaToast) window.afiseazaToast('🛡️ Vizualizarea codului sursă brut este restricționată.');
-        return false;
-      }}
-      if ((_0xE.ctrlKey || _0xE.metaKey) && (_0xE.key === 's' || _0xE.key === 'S')) {{
-        _0xE.preventDefault();
-        return false;
-      }}
-    }}, true);
-
-    // 3. Blocare Right-Click (Context Menu)
-    document.addEventListener('contextmenu', function(_0xE) {{
-      var _0xTag = (_0xE.target && _0xE.target.tagName) ? _0xE.target.tagName.toLowerCase() : '';
-      if (_0xTag === 'input' || _0xTag === 'textarea') return;
-      _0xE.preventDefault();
-      if (window.afiseazaToast) window.afiseazaToast('🛡️ Conținutul și codul sursă sunt protejate prin drepturi de autor.');
-      return false;
-    }});
-
-    // 4. Blocare Tragere Imagini
-    document.addEventListener('dragstart', function(_0xE) {{
-      if (_0xE.target && _0xE.target.tagName && _0xE.target.tagName.toLowerCase() === 'img') {{
-        _0xE.preventDefault();
-      }}
-    }});
-  }}
-
-  // 5. Motor Criptografic de Decodificare & Execuție Securizată
-  var _0xK = {key};
-  var _0xStream = '{hex_payload}';
-
-  var _0xDecrypt = function(_0xHex, _0xKey) {{
-    var _0xBytes = [];
-    for (var _0xI = 0; _0xI < _0xHex.length; _0xI += 2) {{
-      var _0xByte = parseInt(_0xHex.substr(_0xI, 2), 16);
-      var _0xIdx = _0xI / 2;
-      var _0xMask = (_0xKey + (_0xIdx % 37)) & 0xFF;
-      _0xBytes.push(_0xByte ^ _0xMask);
-    }}
-    // Decodare UTF-8
-    var _0xEscaped = '';
-    for (var _0xJ = 0; _0xJ < _0xBytes.length; _0xJ++) {{
-      _0xEscaped += '%' + ('0' + _0xBytes[_0xJ].toString(16)).slice(-2);
-    }}
-    try {{
-      return decodeURIComponent(_0xEscaped);
-    }} catch (_0xErr) {{
-      var _0xStr = '';
-      for (var _0xM = 0; _0xM < _0xBytes.length; _0xM++) {{
-        _0xStr += String.fromCharCode(_0xBytes[_0xM]);
-      }}
-      return _0xStr;
-    }}
-  }};
-
-  var _0xPayloadCode = _0xDecrypt(_0xStream, _0xK);
-  (0, eval)(_0xPayloadCode);
-}})(typeof window !== 'undefined' ? window : this);
-"""
     return loader
 
 if __name__ == '__main__':
@@ -129,5 +108,4 @@ if __name__ == '__main__':
     with open(dest_file, 'w', encoding='utf-8') as f:
         f.write(bundle)
 
-    print(f"Packaged {src_file} -> {dest_file} ({len(src)} bytes source -> {len(bundle)} bytes protected payload)")
-
+    print(f"Packaged {src_file} -> {dest_file} ({len(src)} bytes source -> {len(bundle)} bytes encrypted payload)")

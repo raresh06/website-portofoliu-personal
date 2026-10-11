@@ -1173,12 +1173,11 @@ function initHeroArtAtelier() {
    14. SECURITATE AVANSATĂ: ANTI-INSPECT, ANTI-DEVTOOLS & DREPTURI DE AUTOR
    ========================================================================== */
 function initSecurityProtections() {
-  // 1. Alertă de securitate discretă în DevTools Console
+  // 1. Curățare silențioasă a consolei
   try {
-    const bannerStyle = 'color: #c5a059; font-size: 14px; font-weight: bold; background: #161618; padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.4);';
-    const subStyle = 'color: #888884; font-size: 11px; line-height: 1.5;';
-    console.log('%c🔒 PORTFOLIO — GHEORGHEȘ RAREȘ (GR)', bannerStyle);
-    console.log('%cAll multimedia assets, video edits and source code are protected by copyright laws.\nUnauthorized extraction or inspection is restricted.', subStyle);
+    if (window.console) {
+      console.clear();
+    }
   } catch (err) {}
 
   // 2. Blocare comenzi de tastatură pentru Inspect Element, View Source & Console (silențios, fără pop-up)
@@ -1244,6 +1243,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initCommandPalette();
   window.modalVideo = new ControlerModalVideo();
   window.modalImagine = new ControlerImageLightbox();
-
-  console.log('Portofoliu personal GR — conformitate GDPR, Cookie consent, securitate & cele 7 clipuri video active.');
 });
