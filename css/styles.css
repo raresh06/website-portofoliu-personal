@@ -252,24 +252,30 @@ body.cursor-hover .cursor-circle {
   text-transform: uppercase;
 }
 
-.art-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  color: var(--art-gold);
-  border-bottom: 1px solid var(--art-gold-muted);
-  padding-bottom: 0.35rem;
-  margin-bottom: 1.15rem;
-  letter-spacing: 0.08em;
-}
-
-.roman-num {
+/* --- CIFRE ROMANE DE CAPITOL EDITORIAL (I, II, III, IV, V) --- */
+.roman-num-label {
+  display: inline-block;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
   font-weight: 600;
   color: var(--art-gold-light);
-  font-style: normal;
   line-height: 1;
+  letter-spacing: 0.1em;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--art-gold-muted);
+  margin-bottom: 0.95rem;
+  text-shadow: 0 2px 16px rgba(197, 160, 89, 0.35);
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.roman-num-label:hover {
+  color: #ffffff;
+  border-color: var(--art-gold);
+}
+
+.section-intro-centered .roman-num-label {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* --- LINIE PROGRES SCROLL (QOL) --- */
@@ -633,38 +639,6 @@ body.cursor-hover .cursor-circle {
   mix-blend-mode: screen;
 }
 
-/* 7. Placă Muzeală de Autenticitate Curation */
-.hero-museum-plaque {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.35rem 0.85rem;
-  background-color: rgba(18, 18, 20, 0.82);
-  border: 1px solid rgba(197, 160, 89, 0.28);
-  border-radius: var(--radius-full);
-  z-index: 5;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.plaque-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--art-gold);
-  box-shadow: 0 0 8px var(--art-gold);
-  flex-shrink: 0;
-}
-
-.plaque-text {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: #c9c7bf;
-}
 
 /* Animații Lente & Organice de Atelier */
 @keyframes subtleArtFloat {
@@ -717,27 +691,6 @@ body.cursor-hover .cursor-circle {
   align-items: center;
 }
 
-/* Badge Curation & Direcție Artistică */
-.hero-curation-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.4rem 1rem;
-  background: rgba(197, 160, 89, 0.08);
-  border: 1px solid rgba(197, 160, 89, 0.3);
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  color: var(--art-gold-light);
-  margin-bottom: 1.35rem;
-  text-transform: uppercase;
-}
-
-.hero-curation-badge i {
-  color: var(--art-gold);
-  font-size: 0.85rem;
-}
 
 .hero-heading {
   font-family: var(--font-display);
@@ -787,12 +740,6 @@ body.cursor-hover .cursor-circle {
   font-weight: 700;
 }
 
-.quote-context {
-  font-size: 0.85rem;
-  color: var(--text-faint);
-  font-style: italic;
-  font-family: var(--font-display);
-}
 
 .hero-subtext {
   font-size: 1.05rem;
