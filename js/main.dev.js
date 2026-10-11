@@ -48,25 +48,25 @@ const PROIECTE_VIDEO = {
   },
   'v-sytc-1': {
     id: 'v-sytc-1',
-    title: 'Tiktok — See You There Club (Vol. 1)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 1)',
     category: 'Prezentare Concept',
-    client: 'See You There Club',
-    description: 'Primul clip din seria de teasere vizuale pentru clubul de evenimente, punând accentul pe experiență și anturaj.',
+    client: 'Start Your Trap Career Project',
+    description: 'Primul clip din seria de teasere vizuale pentru proiectul muzical, punând accentul pe experiență și anturaj.',
     videoUrl: 'https://drive.google.com/file/d/1Ft3--MMe3zfr51esLusxRFz1QUYndBgK/preview'
   },
   'v-sytc-2': {
     id: 'v-sytc-2',
-    title: 'Tiktok — See You There Club (Vol. 2)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 2)',
     category: 'Engagement & Vibe',
-    client: 'See You There Club',
-    description: 'Continuarea campaniei video cu cadre rapide și tranziții curate adaptate algoritmului TikTok.',
+    client: 'Start Your Trap Career Project',
+    description: 'Continuarea campaniei video cu cadre dinamice și tranziții curate adaptate algoritmului TikTok.',
     videoUrl: 'https://drive.google.com/file/d/1ReWg1S6gDNCqeVYvd_rWcMBeVs9KxUlu/preview'
   },
   'v-sytc-3': {
     id: 'v-sytc-3',
-    title: 'Tiktok — See You There Club (Vol. 3)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 3)',
     category: 'Reminder Eveniment',
-    client: 'See You There Club',
+    client: 'Start Your Trap Career Project',
     description: 'Clip video scurt conceput pentru consolidarea mesajului de participare și direcționarea spre link-ul de bilete.',
     videoUrl: 'https://drive.google.com/file/d/1JMX6n0DtrQ6vlszNGPWAnEDwZ61-3wxE/preview'
   },
@@ -74,7 +74,7 @@ const PROIECTE_VIDEO = {
     id: 'v-sytc-amr',
     title: 'Tiktok — Numărătoare Inversă A.M.R.',
     category: 'Countdown Final',
-    client: 'See You There Club',
+    client: 'Start Your Trap Career Project',
     description: 'Video de urgență (FOMO) publicat în ultimele zile înaintea evenimentului pentru a stimula decizia de achiziție.',
     videoUrl: 'https://drive.google.com/file/d/1hv3KeuWl8dK486HIpwqc2zQdV--IzMML/preview'
   }
@@ -771,26 +771,26 @@ const COMANDI_PALETTE = [
   },
   {
     id: 'v-sytc-1',
-    title: 'Tiktok — See You There Club (Vol. 1)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 1)',
     category: 'Video 9:16',
     icon: 'fa-solid fa-play',
-    keywords: 'see you there club sytc teaser petrecere noapte',
+    keywords: 'start your trap career project sytc teaser muzica eveniment',
     action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-1'); }
   },
   {
     id: 'v-sytc-2',
-    title: 'Tiktok — See You There Club (Vol. 2)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 2)',
     category: 'Video 9:16',
     icon: 'fa-solid fa-play',
-    keywords: 'sytc vol 2 tranzitie dinamica tiktok',
+    keywords: 'start your trap career sytc vol 2 tranzitie dinamica tiktok',
     action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-2'); }
   },
   {
     id: 'v-sytc-3',
-    title: 'Tiktok — See You There Club (Vol. 3)',
+    title: 'Tiktok — Start Your Trap Career (Vol. 3)',
     category: 'Video 9:16',
     icon: 'fa-solid fa-play',
-    keywords: 'sytc vol 3 reminder bilete link',
+    keywords: 'start your trap career sytc vol 3 reminder bilete link',
     action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-3'); }
   },
   {
@@ -798,7 +798,7 @@ const COMANDI_PALETTE = [
     title: 'Tiktok — Numărătoare Inversă A.M.R.',
     category: 'Video 9:16',
     icon: 'fa-solid fa-play',
-    keywords: 'amr countdown urgenta fomo sytc final',
+    keywords: 'amr countdown urgenta fomo sytc final start your trap career',
     action: () => { window.modalVideo && window.modalVideo.deschide('v-sytc-amr'); }
   },
   // Secțiuni Pagină
